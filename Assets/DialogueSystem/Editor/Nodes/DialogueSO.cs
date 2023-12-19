@@ -6,12 +6,29 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Dialogue")]
-[System.Serializable]
+
 public class DialogueSO : ScriptableObject
 {
 
-    public List<BaseNode> nodesData = new List<BaseNode> ();
-    public List<Edge> edgesData = new List<Edge>();
+    public List<NodeData> nodesData = new List<NodeData> ();
+    public List<EdgeData> edgesData = new List<EdgeData>();
+
+    //public List<EndNodeData> endNodeData = new List<EndNodeData>();
+    //public List<StartNodeData> startNodeData = new List<StartNodeData>();
+    //public List<DialogueNodeData> dialogueNodeData = new List<DialogueNodeData>();
+
+    //public List<NodeData> allNodes
+    //{
+    //    get
+    //    {
+    //        List<NodeData> tmp = new List<NodeData> ();
+    //        tmp.AddRange(startNodeData);
+    //        tmp.AddRange(endNodeData);
+    //        tmp.AddRange(dialogueNodeData);
+
+    //        return tmp;
+    //    }
+    //}
 }
 
 

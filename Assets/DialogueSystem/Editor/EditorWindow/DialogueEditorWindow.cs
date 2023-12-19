@@ -1,6 +1,5 @@
 using UnityEditor;
 using UnityEditor.Callbacks;
-using UnityEditor.PackageManager.UI;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,16 +10,11 @@ public class DialogueEditorWindow : EditorWindow
     DialogueGraphView graphView;
     DialogueSO currentDialogue;
     TextField dialogueName;
-    //private static int windowCount = 0;
-
+    
     [MenuItem("ZTools/Dialogue System/Dialogue Graph")]
     public static void Open()
     {
         GetWindow<DialogueEditorWindow>("Dialogue Editor");
-        //DialogueEditorWindow window = ScriptableObject.CreateInstance<DialogueEditorWindow>();
-        //window.titleContent = new GUIContent("My Window " + windowCount);
-        //window.Show();
-        //windowCount++;
     }
 
     private void OnEnable()
@@ -60,11 +54,6 @@ public class DialogueEditorWindow : EditorWindow
         if (item is DialogueSO) 
         {
             DialogueEditorWindow window = (DialogueEditorWindow)GetWindow(typeof(DialogueEditorWindow));
-            
-            //DialogueEditorWindow window = ScriptableObject.CreateInstance<DialogueEditorWindow>();
-            //window.titleContent = new GUIContent("My Window " + windowCount);
-            //window.Show();
-            //windowCount++;
             window.titleContent = new GUIContent("Dialogue Editor");
             window.currentDialogue = item as DialogueSO;
             window.minSize = new Vector2(500, 300);

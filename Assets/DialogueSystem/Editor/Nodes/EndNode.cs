@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class StartNode : BaseNode
+public class EndNode : BaseNode
 {
 
-    public BaseNode child;
+    
 
     public override void Initialize(Vector2 position)
     {
-        
+
         base.Initialize(position);
-        nodeName = "Start";
+        nodeName = "End";
     }
 
     public override void Draw()
     {
         base.Draw();
-        AddOutputPort();
+        AddInputPort();
         RefreshExpandedState();
     }
 }
+

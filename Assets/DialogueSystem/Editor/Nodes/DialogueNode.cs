@@ -4,8 +4,11 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[System.Serializable]
 public class DialogueNode : BaseNode
 {
+    List<BaseNode> children = new List<BaseNode>();
+
     public override void Initialize(Vector2 position)
     {
         
@@ -16,7 +19,6 @@ public class DialogueNode : BaseNode
     public override void Draw()
     {
         base.Draw();
-        inputContainer.style.flexDirection = FlexDirection.Row;
         AddInputPort(Port.Capacity.Multi);
         AddOutputPort();
         
