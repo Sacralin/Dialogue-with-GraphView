@@ -14,25 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesData:
   - nodeType: Start
-    customNodeName: adasd
-    GUID: d2f0ce7a-a62e-4ed5-a747-e28c0d3cf794
+    customNodeName: CustomNodeName
+    GUID: 54fdb7e0-a47a-4fa3-b0e9-afe501be7e4d
     graphPosition: {x: 50, y: 50}
     choices: []
     text: Dialogue Text
-  - nodeType: Dialogue
-    customNodeName: asdasda
-    GUID: e09c37c9-aca9-4aed-8b37-ff415d270250
-    graphPosition: {x: 249, y: 99}
+  - nodeType: BasicDialogue
+    customNodeName: CustomNodeName
+    GUID: 6f006439-0f42-46e7-9e52-d9bd2e3ff8f5
+    graphPosition: {x: 267, y: 158}
     choices: []
-    text: Dialogue Text
+    text: Hi, How are you?
   - nodeType: Dialogue
-    customNodeName: sdadasd
-    GUID: d988d6df-f170-4b9e-b5e3-79345101f569
-    graphPosition: {x: 463, y: 238}
+    customNodeName: CustomNodeName
+    GUID: cbb14302-5286-433b-9c79-bf7c59ddca81
+    graphPosition: {x: 584, y: 134}
     choices: []
-    text: Dialogue Text
+    text: No
+  - nodeType: BasicDialogue
+    customNodeName: CustomNodeName
+    GUID: fe26edea-6760-474a-ba57-1c1cd877dd2a
+    graphPosition: {x: 899, y: 50}
+    choices: []
+    text: Great thanks
+  - nodeType: BasicDialogue
+    customNodeName: CustomNodeName
+    GUID: 04a14b24-6f01-42b3-baa5-222548ee42f5
+    graphPosition: {x: 899, y: 257}
+    choices: []
+    text: Ok another time maybe
   edgesData:
-  - sourceNodeGuid: e09c37c9-aca9-4aed-8b37-ff415d270250
-    targetNodeGuid: d988d6df-f170-4b9e-b5e3-79345101f569
-  - sourceNodeGuid: d2f0ce7a-a62e-4ed5-a747-e28c0d3cf794
-    targetNodeGuid: e09c37c9-aca9-4aed-8b37-ff415d270250
+  - sourceNodeGuid: 6f006439-0f42-46e7-9e52-d9bd2e3ff8f5
+    targetNodeGuid: cbb14302-5286-433b-9c79-bf7c59ddca81
+  - sourceNodeGuid: 54fdb7e0-a47a-4fa3-b0e9-afe501be7e4d
+    targetNodeGuid: 6f006439-0f42-46e7-9e52-d9bd2e3ff8f5
+  - sourceNodeGuid: cbb14302-5286-433b-9c79-bf7c59ddca81
+    targetNodeGuid: fe26edea-6760-474a-ba57-1c1cd877dd2a
+  - sourceNodeGuid: cbb14302-5286-433b-9c79-bf7c59ddca81
+    targetNodeGuid: 04a14b24-6f01-42b3-baa5-222548ee42f5

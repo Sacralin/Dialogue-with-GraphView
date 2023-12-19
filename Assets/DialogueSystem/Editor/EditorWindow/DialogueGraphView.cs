@@ -24,6 +24,7 @@ public class DialogueGraphView : GraphView
         this.AddManipulator(new ContentDragger());
         this.AddManipulator(new SelectionDragger());
         this.AddManipulator(new RectangleSelector());
+        this.AddManipulator(CreateNodeContextualMenu("Add Node (BasicDialogue)", "BasicDialogueNode"));
         this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", "DialogueNode"));
     }
 

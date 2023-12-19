@@ -43,7 +43,12 @@ public class DialogueEditorWindow : EditorWindow
         Button loadButton = new Button(() => { Load(); }) { text = "Load" };
         toolbar.Add(loadButton);
 
-        dialogueName = new TextField("FileName:") { value = "New Dialogue" };
+        Label label = new Label("FileName:");
+        label.style.paddingTop = 2;
+        label.style.paddingLeft = 20;
+        toolbar.Add(label);
+
+        dialogueName = new TextField() { value = "New Dialogue" };
         toolbar.Add(dialogueName);
 
         rootVisualElement.Add(toolbar);

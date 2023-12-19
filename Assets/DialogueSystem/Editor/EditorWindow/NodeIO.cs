@@ -74,11 +74,11 @@ public class NodeIO
     private BaseNode CreateNode(NodeData nodeData)
     {
         BaseNode newNode = ToBaseNode(nodeData);
-        Debug.Log($"Before Int+Draw: {newNode.nodeType} {newNode.customNodeName} {newNode.text} {newNode.GUID}");
+        //Debug.Log($"Before Int+Draw: {newNode.nodeType} {newNode.customNodeName} {newNode.text} {newNode.GUID}");
         newNode.SetPosition(new Rect(newNode.graphPosition, Vector2.zero));
         newNode.Draw();
         graphView.AddElement(newNode);
-        Debug.Log($"Post Int+Draw: {newNode.nodeType} {newNode.customNodeName} {newNode.text} {newNode.GUID}");
+        //Debug.Log($"Post Int+Draw: {newNode.nodeType} {newNode.customNodeName} {newNode.text} {newNode.GUID}");
 
         return newNode;
     }
@@ -148,6 +148,9 @@ public class NodeIO
                 break;
             case "End":
                 newNode = new EndNode();
+                break;
+            case "BasicDialogue":
+                newNode = new BasicDialogueNode();
                 break;
             default:
                 newNode = new BaseNode();
