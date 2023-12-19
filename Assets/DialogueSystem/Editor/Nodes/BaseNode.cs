@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -8,20 +7,16 @@ using UnityEngine.UIElements;
 [Serializable]
 public class BaseNode : Node
 {
-    public string nodeName;
+    public string nodeType;
     public string customNodeName;
     public List<string> choices;
     public string text;
     public string GUID;
     public Vector2 graphPosition;
 
-    
-
-    
-
     public virtual void Initialize(Vector2 position)
     {
-        nodeName = "NodeType";
+        nodeType = "NodeType";
         customNodeName = "CustomNodeName";
         choices = new List<string>();
         text = "Dialogue Text";
@@ -32,10 +27,9 @@ public class BaseNode : Node
 
     public virtual void Draw()
     {
-        //style.width = 200f;
         //Title container 
         titleContainer.style.flexDirection = FlexDirection.Column;
-        Label nodeLabel = new Label() { text = nodeName};
+        Label nodeLabel = new Label() { text = nodeType };
         titleContainer.Insert(0, nodeLabel);
 
         TextField customNodeNameTextField = new TextField("");

@@ -7,9 +7,11 @@ using UnityEngine.UIElements;
 
 public class DialogueEditorWindow : EditorWindow
 {
-    DialogueGraphView graphView;
-    DialogueSO currentDialogue;
-    TextField dialogueName;
+    private DialogueGraphView graphView;
+    private DialogueSO currentDialogue;
+    private TextField dialogueName;
+    private NodeIO nodeIO;
+
     
     [MenuItem("ZTools/Dialogue System/Dialogue Graph")]
     public static void Open()
@@ -28,14 +30,14 @@ public class DialogueEditorWindow : EditorWindow
         graphView = new DialogueGraphView();
         graphView.StretchToParentSize();
         rootVisualElement.Add(graphView);
-        
+        nodeIO = new NodeIO(graphView);
     }
 
     private void AddToolbar()
     {
         Toolbar toolbar = new Toolbar();
 
-        Button saveButton = new Button(() => { graphView.Save(dialogueName.value); }) { text = "Save"};
+        Button saveButton = new Button(() => { nodeIO.Save(dialogueName.value); }) { text = "Save"};
         toolbar.Add(saveButton);
 
         Button loadButton = new Button(() => { Load(); }) { text = "Load" };
@@ -64,21 +66,15 @@ public class DialogueEditorWindow : EditorWindow
         return false;
     }
 
-    private void Load()
+    private void Load() 
     {
-        graphView.DeleteElements(graphView.graphElements.ToList());
         if (currentDialogue != null)
         {
             dialogueName.value = currentDialogue.name;
         }
-        graphView.Load(currentDialogue);
+        nodeIO.Load(currentDialogue);
         
     }
-
-
-
-
-
 
 }
 

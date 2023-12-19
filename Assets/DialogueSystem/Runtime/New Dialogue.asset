@@ -13,26 +13,26 @@ MonoBehaviour:
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
   nodesData:
-  - nodeName: Start
-    customNodeName: StartNode
-    GUID: e39d058e-8d9e-4911-a6af-f4f9a6da9e33
+  - nodeType: Start
+    customNodeName: adasd
+    GUID: d2f0ce7a-a62e-4ed5-a747-e28c0d3cf794
     graphPosition: {x: 50, y: 50}
     choices: []
     text: Dialogue Text
-  - nodeName: Dialogue
-    customNodeName: Dia1
-    GUID: 83db1e17-7907-4866-9e7e-720c4f6c53d6
-    graphPosition: {x: 289, y: 136}
+  - nodeType: Dialogue
+    customNodeName: asdasda
+    GUID: e09c37c9-aca9-4aed-8b37-ff415d270250
+    graphPosition: {x: 249, y: 99}
     choices: []
     text: Dialogue Text
-  - nodeName: Dialogue
-    customNodeName: Dia2
-    GUID: 97479b87-9a9c-4320-9a1c-c0cfbea7e548
-    graphPosition: {x: 613, y: 272}
+  - nodeType: Dialogue
+    customNodeName: sdadasd
+    GUID: d988d6df-f170-4b9e-b5e3-79345101f569
+    graphPosition: {x: 463, y: 238}
     choices: []
     text: Dialogue Text
   edgesData:
-  - sourceNodeGuid: e39d058e-8d9e-4911-a6af-f4f9a6da9e33
-    targetNodeGuid: 83db1e17-7907-4866-9e7e-720c4f6c53d6
-  - sourceNodeGuid: 83db1e17-7907-4866-9e7e-720c4f6c53d6
-    targetNodeGuid: 97479b87-9a9c-4320-9a1c-c0cfbea7e548
+  - sourceNodeGuid: e09c37c9-aca9-4aed-8b37-ff415d270250
+    targetNodeGuid: d988d6df-f170-4b9e-b5e3-79345101f569
+  - sourceNodeGuid: d2f0ce7a-a62e-4ed5-a747-e28c0d3cf794
+    targetNodeGuid: e09c37c9-aca9-4aed-8b37-ff415d270250
