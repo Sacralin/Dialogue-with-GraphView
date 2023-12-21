@@ -5,7 +5,7 @@ using UnityEngine;
 public class DialogueSO : ScriptableObject
 {
     public List<NodeData> nodesData = new List<NodeData> ();
-    public List<EdgeData> edgesData = new List<EdgeData>();
+    //public List<EdgeData> edgesData = new List<EdgeData>();
 
 }
 

@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEditor.Callbacks;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -40,8 +41,11 @@ public class DialogueEditorWindow : EditorWindow
         Button saveButton = new Button(() => { nodeIO.Save(dialogueName.value); }) { text = "Save"};
         toolbar.Add(saveButton);
 
-        Button loadButton = new Button(() => { Load(); }) { text = "Load" };
+        Button loadButton = new Button(() => { Debug.Log("Not Yet Implemented"); }) { text = "Load" };
         toolbar.Add(loadButton);
+
+        Button newButton = new Button(() => { graphView.Refresh(); }) { text = "New" };
+        toolbar.Add(newButton);
 
         Label label = new Label("FileName:");
         label.style.paddingTop = 2;
@@ -80,6 +84,8 @@ public class DialogueEditorWindow : EditorWindow
         nodeIO.Load(currentDialogue);
         
     }
+
+    
 
 }
 

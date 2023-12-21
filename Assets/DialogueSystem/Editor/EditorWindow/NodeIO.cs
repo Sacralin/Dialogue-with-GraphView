@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class NodeIO
 {
@@ -17,24 +19,49 @@ public class NodeIO
     {
         DialogueSO dialogueSO = ScriptableObject.CreateInstance<DialogueSO>();
 
+        graphView.ClearOldEdgeData();
         dialogueSO.nodesData = SaveNodes().ToList();
-        dialogueSO.edgesData = SaveEdges().ToList();
-
+        //dialogueSO.edgesData = SaveEdges().ToList(); depreciated
+        
         AssetDatabase.CreateAsset(dialogueSO, $"Assets/DialogueSystem/Runtime/{filename}.asset");
         AssetDatabase.SaveAssets();
     }
 
-    public List<NodeData> SaveNodes()
+    
+
+    private List<NodeData> SaveNodes()
     {
         List<NodeData> allNodes = new List<NodeData>();
         foreach (var node in graphView.nodes.ToList())
         {
+            //LinkEdgesToChoices((BaseNode)node); deprciated
             NodeData nodeData = FromBaseNode((BaseNode)node);
             allNodes.Add(nodeData);
         }
         return allNodes;
     }
 
+    //depreciated as edge data now saves ongraphchange?
+    /*
+    private void LinkEdgesToChoices(BaseNode node) //Adds Edgedata to choices array to centeralise the information
+    {
+        foreach (ChoiceData choiceData in node.choices)
+        {
+            Port port = (Port)node.outputContainer.ElementAt(choiceData.index);
+            if (port.connected)
+            {
+                Edge edge = port.connections.First();
+                BaseNode connectedNode = (BaseNode)edge.input.node;
+                EdgeData edgeData = new EdgeData();
+                edgeData.targetNodeGuid = connectedNode.GUID;
+                edgeData.sourceNodeGuid = node.GUID;
+                choiceData.edgeData = edgeData;
+            }
+            
+        }
+    }
+    */
+    /*depreciated
     private List<EdgeData> SaveEdges()
     {
         List<EdgeData> allEdges = new List<EdgeData>();
@@ -52,13 +79,14 @@ public class NodeIO
         }
         return allEdges;
     }
+    */
 
     public void Load(DialogueSO dialogue)
     {
         graphView.DeleteElements(graphView.graphElements.ToList());
         Dictionary<string, BaseNode> createdNodes = new Dictionary<string, BaseNode>();
         LoadNodeData(dialogue, createdNodes);
-        LoadEdgeData(dialogue, createdNodes);
+        //LoadEdgeData(dialogue, createdNodes); depreciated
     }
 
     private void LoadNodeData(DialogueSO dialogue, Dictionary<string, BaseNode> createdNodes)
@@ -74,15 +102,12 @@ public class NodeIO
     private BaseNode CreateNode(NodeData nodeData)
     {
         BaseNode newNode = ToBaseNode(nodeData);
-        //Debug.Log($"Before Int+Draw: {newNode.nodeType} {newNode.customNodeName} {newNode.text} {newNode.GUID}");
         newNode.SetPosition(new Rect(newNode.graphPosition, Vector2.zero));
         newNode.Draw();
         graphView.AddElement(newNode);
-        //Debug.Log($"Post Int+Draw: {newNode.nodeType} {newNode.customNodeName} {newNode.text} {newNode.GUID}");
-
         return newNode;
     }
-
+    /* Depreciated
     private void LoadEdgeData(DialogueSO dialogue, Dictionary<string, BaseNode> createdNodes)
     {
         foreach (var edgeData in dialogue.edgesData)
@@ -95,14 +120,15 @@ public class NodeIO
             }
         }
     }
+    */
 
-
+    /* replaced by graphview.connectNodes?
     private void ConnectNodes(BaseNode sourceNode, BaseNode targetNode)
     {
         if (sourceNode != null && targetNode != null)
         {
-            Port outputPort = sourceNode.outputContainer.ElementAt(0) as Port;
-            Port inputPort = targetNode.inputContainer.ElementAt(0) as Port;
+            Port outputPort = (Port)sourceNode.outputContainer.ElementAt(0);
+            Port inputPort = (Port)targetNode.inputContainer.ElementAt(0);
 
             if (outputPort != null && inputPort != null)
             {
@@ -119,9 +145,10 @@ public class NodeIO
             }
         }
     }
+    */
 
     // switch data type for storage and instansing 
-    public static NodeData FromBaseNode(BaseNode baseNode)
+    private static NodeData FromBaseNode(BaseNode baseNode)
     {
         NodeData nodeData = new NodeData();
         nodeData.nodeType = baseNode.nodeType;
@@ -135,7 +162,7 @@ public class NodeIO
         return nodeData;
     }
 
-    public BaseNode ToBaseNode(NodeData nodeData)
+    private BaseNode ToBaseNode(NodeData nodeData)
     {
         BaseNode newNode;
         switch (nodeData.nodeType)

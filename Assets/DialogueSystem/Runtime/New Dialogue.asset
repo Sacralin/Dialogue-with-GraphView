@@ -15,40 +15,26 @@ MonoBehaviour:
   nodesData:
   - nodeType: Start
     customNodeName: CustomNodeName
-    GUID: 54fdb7e0-a47a-4fa3-b0e9-afe501be7e4d
+    GUID: 08d5e2b6-7c1a-4f4a-8e62-37287898ae9a
     graphPosition: {x: 50, y: 50}
-    choices: []
+    choices:
+    - index: 0
+      choice: 
+      portName: d50e8b02-c087-4784-8101-5e3997c28ea4
+      edgeData:
+        sourceNodeGuid: 
+        targetNodeGuid: 
     text: Dialogue Text
-  - nodeType: BasicDialogue
-    customNodeName: CustomNodeName
-    GUID: 6f006439-0f42-46e7-9e52-d9bd2e3ff8f5
-    graphPosition: {x: 267, y: 158}
-    choices: []
-    text: Hi, How are you?
   - nodeType: Dialogue
     customNodeName: CustomNodeName
-    GUID: cbb14302-5286-433b-9c79-bf7c59ddca81
-    graphPosition: {x: 584, y: 134}
-    choices: []
-    text: No
-  - nodeType: BasicDialogue
-    customNodeName: CustomNodeName
-    GUID: fe26edea-6760-474a-ba57-1c1cd877dd2a
-    graphPosition: {x: 899, y: 50}
-    choices: []
-    text: Great thanks
-  - nodeType: BasicDialogue
-    customNodeName: CustomNodeName
-    GUID: 04a14b24-6f01-42b3-baa5-222548ee42f5
-    graphPosition: {x: 899, y: 257}
-    choices: []
-    text: Ok another time maybe
-  edgesData:
-  - sourceNodeGuid: 6f006439-0f42-46e7-9e52-d9bd2e3ff8f5
-    targetNodeGuid: cbb14302-5286-433b-9c79-bf7c59ddca81
-  - sourceNodeGuid: 54fdb7e0-a47a-4fa3-b0e9-afe501be7e4d
-    targetNodeGuid: 6f006439-0f42-46e7-9e52-d9bd2e3ff8f5
-  - sourceNodeGuid: cbb14302-5286-433b-9c79-bf7c59ddca81
-    targetNodeGuid: fe26edea-6760-474a-ba57-1c1cd877dd2a
-  - sourceNodeGuid: cbb14302-5286-433b-9c79-bf7c59ddca81
-    targetNodeGuid: 04a14b24-6f01-42b3-baa5-222548ee42f5
+    GUID: fbc6bdeb-7187-4afe-b4a5-47a06a997888
+    graphPosition: {x: 329, y: 182}
+    choices:
+    - index: 0
+      choice: 
+      portName: 17521caa-4904-4ba3-ac6d-f6488133faff
+      edgeData:
+        sourceNodeGuid: 
+        targetNodeGuid: 
+    text: Dialogue Text
+  edgesData: []
