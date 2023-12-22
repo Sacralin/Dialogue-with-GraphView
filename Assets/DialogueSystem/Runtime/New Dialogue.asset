@@ -15,26 +15,62 @@ MonoBehaviour:
   nodesData:
   - nodeType: Start
     customNodeName: CustomNodeName
-    GUID: 08d5e2b6-7c1a-4f4a-8e62-37287898ae9a
+    GUID: 362c30c6-da32-441e-b91a-29d1b1719c17
     graphPosition: {x: 50, y: 50}
     choices:
     - index: 0
       choice: 
-      portName: d50e8b02-c087-4784-8101-5e3997c28ea4
+      portName: a39a081e-d962-45bd-afa8-67ef2a2402b3
       edgeData:
-        sourceNodeGuid: 
-        targetNodeGuid: 
+        sourceNodeGuid: 362c30c6-da32-441e-b91a-29d1b1719c17
+        targetNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
     text: Dialogue Text
   - nodeType: Dialogue
     customNodeName: CustomNodeName
-    GUID: fbc6bdeb-7187-4afe-b4a5-47a06a997888
-    graphPosition: {x: 329, y: 182}
+    GUID: 64e4aa21-0f99-42b8-abf8-36b50f29b100
+    graphPosition: {x: 348, y: 197}
     choices:
     - index: 0
       choice: 
-      portName: 17521caa-4904-4ba3-ac6d-f6488133faff
+      portName: 531eac29-cf97-4060-82c7-bd086fdaa913
+      edgeData:
+        sourceNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
+        targetNodeGuid: 40fa9c51-6521-4d8b-a993-1b8d20ecac4f
+    - index: 1
+      choice: 
+      portName: 0c68afd4-0df7-4dc9-bdac-e5825932fe5b
+      edgeData:
+        sourceNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
+        targetNodeGuid: 0dff5c4e-3b52-4b85-a8b6-c7f4d787f70d
+    text: Dialogue Text
+  - nodeType: BasicDialogue
+    customNodeName: CustomNodeName
+    GUID: 40fa9c51-6521-4d8b-a993-1b8d20ecac4f
+    graphPosition: {x: 715, y: 218}
+    choices:
+    - index: 0
+      choice: 
+      portName: fc60ec33-f7cb-4124-b114-4cc173e9bb87
       edgeData:
         sourceNodeGuid: 
         targetNodeGuid: 
     text: Dialogue Text
-  edgesData: []
+  - nodeType: BasicDialogue
+    customNodeName: CustomNodeName
+    GUID: 0dff5c4e-3b52-4b85-a8b6-c7f4d787f70d
+    graphPosition: {x: 742, y: 403}
+    choices:
+    - index: 0
+      choice: 
+      portName: e8174921-e716-4bba-a615-5b9a1eb37b17
+      edgeData:
+        sourceNodeGuid: 
+        targetNodeGuid: 
+    text: Dialogue Text
+  edgesData:
+  - sourceNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
+    targetNodeGuid: 40fa9c51-6521-4d8b-a993-1b8d20ecac4f
+  - sourceNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
+    targetNodeGuid: 0dff5c4e-3b52-4b85-a8b6-c7f4d787f70d
+  - sourceNodeGuid: 362c30c6-da32-441e-b91a-29d1b1719c17
+    targetNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100

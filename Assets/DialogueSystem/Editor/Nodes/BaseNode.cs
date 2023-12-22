@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition.Primitives;
-using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,6 +17,7 @@ public class BaseNode : Node
     
     public virtual void Initialize(Vector2 position)
     {
+        
         nodeType = "NodeType";
         customNodeName = "CustomNodeName";
         choices = new List<ChoiceData>();
@@ -30,7 +29,6 @@ public class BaseNode : Node
 
     public virtual void Draw()
     {
-        
         titleContainer.style.width = 210;
         //Title container 
         titleContainer.style.flexDirection = FlexDirection.Column;
@@ -47,8 +45,6 @@ public class BaseNode : Node
     {
         graphView = dialogueGraphView;
     }
-
-
 
     public void AddOutputPort()
     {

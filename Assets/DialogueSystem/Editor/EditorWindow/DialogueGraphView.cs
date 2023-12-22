@@ -98,14 +98,15 @@ public class DialogueGraphView : GraphView
     public void ConnectNodes(BaseNode node)
     {
         foreach(ChoiceData choice in node.choices) { //itterate over choices
-            if (choice.edgeData != null && choice.edgeData.sourceNodeGuid != null && choice.edgeData.targetNodeGuid != null) { //null check
+            if (choice.edgeData != null && choice.edgeData.sourceNodeGuid != null && choice.edgeData.targetNodeGuid != null) { //check if edge data is present
                 BaseNode targetNode = new BaseNode(); //target node container
-                foreach(BaseNode nodes in nodes.ToList()) { //check for all basenodes in nodes(graphview)
-                    if(choice.edgeData.targetNodeGuid == nodes.GUID) { //check if node is targetnode
+                foreach(BaseNode nodes in nodes.ToList()) { //get all basenodes in nodes(graphview)
+                    if(choice.edgeData.targetNodeGuid == nodes.GUID) { //find targetnode in graphview
                         targetNode = nodes; //store targetnode
                     }
                 }
-                Port inputPort = (Port)targetNode.inputContainer.ElementAt(0); //nodes only have 1 input so we assign that
+                Port inputPort = targetNode.inputContainer.Children().OfType<Port>().FirstOrDefault();
+                //Port inputPort = (Port)targetNode.inputContainer.ElementAt(0); //nodes only have 1 input so we assign that
                 Port outputPort = (Port)node.outputContainer.ElementAt(choice.index); //assign subject nodes output based on data stored in choices
                 if (outputPort != null && inputPort != null) { //null check
                     Edge edge = new Edge { output = outputPort, input = inputPort }; //create the new edge and assign ports
@@ -115,6 +116,7 @@ public class DialogueGraphView : GraphView
                     node.RefreshPorts(); //refresh ports
                     targetNode.RefreshPorts(); //refresh ports
                 }
+                
             }
         }
     }

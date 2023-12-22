@@ -21,20 +21,23 @@ public class NodeIO
 
         graphView.ClearOldEdgeData();
         dialogueSO.nodesData = SaveNodes().ToList();
-        //dialogueSO.edgesData = SaveEdges().ToList(); depreciated
+        dialogueSO.edgesData = SaveEdges().ToList(); //depreciated
+
         
+        
+
         AssetDatabase.CreateAsset(dialogueSO, $"Assets/DialogueSystem/Runtime/{filename}.asset");
         AssetDatabase.SaveAssets();
     }
 
-    
+
 
     private List<NodeData> SaveNodes()
     {
         List<NodeData> allNodes = new List<NodeData>();
         foreach (var node in graphView.nodes.ToList())
         {
-            //LinkEdgesToChoices((BaseNode)node); deprciated
+            LinkEdgesToChoices((BaseNode)node); //deprciated
             NodeData nodeData = FromBaseNode((BaseNode)node);
             allNodes.Add(nodeData);
         }
@@ -42,7 +45,7 @@ public class NodeIO
     }
 
     //depreciated as edge data now saves ongraphchange?
-    /*
+    
     private void LinkEdgesToChoices(BaseNode node) //Adds Edgedata to choices array to centeralise the information
     {
         foreach (ChoiceData choiceData in node.choices)
@@ -60,8 +63,8 @@ public class NodeIO
             
         }
     }
-    */
-    /*depreciated
+    
+    //depreciated
     private List<EdgeData> SaveEdges()
     {
         List<EdgeData> allEdges = new List<EdgeData>();
@@ -79,14 +82,16 @@ public class NodeIO
         }
         return allEdges;
     }
-    */
+    
 
     public void Load(DialogueSO dialogue)
     {
         graphView.DeleteElements(graphView.graphElements.ToList());
         Dictionary<string, BaseNode> createdNodes = new Dictionary<string, BaseNode>();
         LoadNodeData(dialogue, createdNodes);
-        //LoadEdgeData(dialogue, createdNodes); depreciated
+        LoadEdgeData(dialogue, createdNodes); //depreciated
+
+        foreach (BaseNode node in graphView.nodes) { graphView.ConnectNodes(node); }
     }
 
     private void LoadNodeData(DialogueSO dialogue, Dictionary<string, BaseNode> createdNodes)
@@ -104,10 +109,11 @@ public class NodeIO
         BaseNode newNode = ToBaseNode(nodeData);
         newNode.SetPosition(new Rect(newNode.graphPosition, Vector2.zero));
         newNode.Draw();
+        newNode.GraphView(graphView);
         graphView.AddElement(newNode);
         return newNode;
     }
-    /* Depreciated
+    // Depreciated
     private void LoadEdgeData(DialogueSO dialogue, Dictionary<string, BaseNode> createdNodes)
     {
         foreach (var edgeData in dialogue.edgesData)
@@ -120,9 +126,9 @@ public class NodeIO
             }
         }
     }
-    */
+    
 
-    /* replaced by graphview.connectNodes?
+    // replaced by graphview.connectNodes?
     private void ConnectNodes(BaseNode sourceNode, BaseNode targetNode)
     {
         if (sourceNode != null && targetNode != null)
@@ -145,7 +151,7 @@ public class NodeIO
             }
         }
     }
-    */
+    
 
     // switch data type for storage and instansing 
     private static NodeData FromBaseNode(BaseNode baseNode)

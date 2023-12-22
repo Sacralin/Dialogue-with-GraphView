@@ -80,10 +80,18 @@ public class DialogueNode : BaseNode
     // NOTE: port index works the same as an array, therefore with 3 ports 0,1,2 removing port 1 will leave index 0 and 2 remaning
     private void DeletePort(Port port) 
     {
-        foreach(Port containerPort in outputContainer.Children().ToList()) { //remove connections from output ports
-            foreach (Edge edge in containerPort.connections) {
-                if (edge != null) { graphView.RemoveElement(edge); } 
+        foreach (Port containerPort in outputContainer.Children().ToList())
+        {
+            
+            foreach (Edge edge in containerPort.connections)
+            {
+                if (edge != null)
+                { 
+                    edge.input.Disconnect(edge);
+                    graphView.RemoveElement(edge);
+                }
             }
+            
         }
         graphView.ClearOldEdgeData(); // clear stored edge data
         choices.RemoveAll(choice => choice.index == outputContainer.IndexOf(port)); //remove choice from list
