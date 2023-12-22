@@ -9,12 +9,10 @@ using UnityEngine.UIElements;
 
 public class DialogueGraphView : GraphView
 {
-    //private List<Edge> previousEdges = new List<Edge>();
-
+ 
     public DialogueGraphView()
     {
         graphViewChanged += OnGraphViewChanged;
-        //previousEdges.AddRange(edges.ToList());
         AddManipulators();
         AddGridBackground();
         AddStyles();

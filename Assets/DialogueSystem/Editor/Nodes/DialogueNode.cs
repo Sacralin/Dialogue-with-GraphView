@@ -18,6 +18,8 @@ public class DialogueNode : BaseNode
     public override void Draw()
     {
         base.Draw();
+        titleContainer.style.backgroundColor = new StyleColor(new Color(0.6f, 0.6f, 0.2f)); ;
+        titleContainer.style.color = Color.white;
         AddAddChoiceButton();
         AddDialogueBox();
         AddInputPort(Port.Capacity.Multi);

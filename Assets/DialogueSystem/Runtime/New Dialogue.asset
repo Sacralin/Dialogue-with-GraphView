@@ -15,62 +15,61 @@ MonoBehaviour:
   nodesData:
   - nodeType: Start
     customNodeName: CustomNodeName
-    GUID: 362c30c6-da32-441e-b91a-29d1b1719c17
+    GUID: ab7ef902-10c3-4b27-a4bd-08fb62117890
     graphPosition: {x: 50, y: 50}
     choices:
     - index: 0
       choice: 
-      portName: a39a081e-d962-45bd-afa8-67ef2a2402b3
+      portName: 8e91961c-cad7-4d4a-81a0-1804370d0a74
       edgeData:
-        sourceNodeGuid: 362c30c6-da32-441e-b91a-29d1b1719c17
-        targetNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
+        sourceNodeGuid: ab7ef902-10c3-4b27-a4bd-08fb62117890
+        targetNodeGuid: d0fc66ef-de66-4870-bb98-67df796bc596
+    text: Dialogue Text
+  - nodeType: BasicDialogue
+    customNodeName: CustomNodeName
+    GUID: 37b2b548-0222-4595-a0a7-80b67c08bb8d
+    graphPosition: {x: 773, y: 363}
+    choices:
+    - index: 0
+      choice: 
+      portName: 54ccdfb1-679b-4ba1-9862-e87ddb991cf3
+      edgeData:
+        sourceNodeGuid: 
+        targetNodeGuid: 
+    text: Dialogue Text
+  - nodeType: BasicDialogue
+    customNodeName: CustomNodeName
+    GUID: 393abe03-7dfc-4d8f-bcc2-911cb6701a10
+    graphPosition: {x: 719, y: 111}
+    choices:
+    - index: 0
+      choice: 
+      portName: 3ac723dd-ebd7-4a0f-9b7f-3b4ed123bd63
+      edgeData:
+        sourceNodeGuid: 
+        targetNodeGuid: 
     text: Dialogue Text
   - nodeType: Dialogue
     customNodeName: CustomNodeName
-    GUID: 64e4aa21-0f99-42b8-abf8-36b50f29b100
-    graphPosition: {x: 348, y: 197}
+    GUID: d0fc66ef-de66-4870-bb98-67df796bc596
+    graphPosition: {x: 322, y: 186}
     choices:
     - index: 0
       choice: 
-      portName: 531eac29-cf97-4060-82c7-bd086fdaa913
+      portName: 3decc7ae-d8dd-4b94-84a7-cc03633eba86
       edgeData:
-        sourceNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
-        targetNodeGuid: 40fa9c51-6521-4d8b-a993-1b8d20ecac4f
+        sourceNodeGuid: d0fc66ef-de66-4870-bb98-67df796bc596
+        targetNodeGuid: 393abe03-7dfc-4d8f-bcc2-911cb6701a10
     - index: 1
       choice: 
-      portName: 0c68afd4-0df7-4dc9-bdac-e5825932fe5b
-      edgeData:
-        sourceNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
-        targetNodeGuid: 0dff5c4e-3b52-4b85-a8b6-c7f4d787f70d
-    text: Dialogue Text
-  - nodeType: BasicDialogue
-    customNodeName: CustomNodeName
-    GUID: 40fa9c51-6521-4d8b-a993-1b8d20ecac4f
-    graphPosition: {x: 715, y: 218}
-    choices:
-    - index: 0
-      choice: 
-      portName: fc60ec33-f7cb-4124-b114-4cc173e9bb87
+      portName: 58001684-d1cc-49db-9401-fc56b7caeb5c
       edgeData:
         sourceNodeGuid: 
         targetNodeGuid: 
-    text: Dialogue Text
-  - nodeType: BasicDialogue
-    customNodeName: CustomNodeName
-    GUID: 0dff5c4e-3b52-4b85-a8b6-c7f4d787f70d
-    graphPosition: {x: 742, y: 403}
-    choices:
-    - index: 0
+    - index: 2
       choice: 
-      portName: e8174921-e716-4bba-a615-5b9a1eb37b17
+      portName: 4d07137b-b84b-41ba-ad53-fffa3c029cc2
       edgeData:
-        sourceNodeGuid: 
-        targetNodeGuid: 
+        sourceNodeGuid: d0fc66ef-de66-4870-bb98-67df796bc596
+        targetNodeGuid: 37b2b548-0222-4595-a0a7-80b67c08bb8d
     text: Dialogue Text
-  edgesData:
-  - sourceNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
-    targetNodeGuid: 40fa9c51-6521-4d8b-a993-1b8d20ecac4f
-  - sourceNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
-    targetNodeGuid: 0dff5c4e-3b52-4b85-a8b6-c7f4d787f70d
-  - sourceNodeGuid: 362c30c6-da32-441e-b91a-29d1b1719c17
-    targetNodeGuid: 64e4aa21-0f99-42b8-abf8-36b50f29b100
