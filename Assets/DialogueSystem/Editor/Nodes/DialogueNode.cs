@@ -41,30 +41,21 @@ public class DialogueNode : BaseNode
     {
         if (choiceData == null)
             choiceData = new ChoiceData();
-
         Port port = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
         port.portName = "";
         
-
         TextField choiceTextField = new TextField("");
         choiceTextField.RegisterValueChangedCallback(value => { choiceData.choice = value.newValue; });
         choiceTextField.SetValueWithoutNotify(choiceData.choice);
         choiceTextField.style.width = 80;
         port.Add(choiceTextField);
-
-        if (outputContainer.childCount > 0)
-        {
+        if (outputContainer.childCount > 0) {
             Button deletePortButton = new Button(() => DeletePort(port)) { text = "X" };
             port.Add(deletePortButton);
             port.style.left = 0;
         }
-
-        if (isLoaded)
-        {
-            outputContainer.Insert(choiceData.index, port);
-        }
-        else
-        {
+        if (isLoaded) { outputContainer.Insert(choiceData.index, port); }
+        else {
             port.name = Guid.NewGuid().ToString();
             outputContainer.Add(port);
             choiceData.index = outputContainer.IndexOf(port);
@@ -82,18 +73,13 @@ public class DialogueNode : BaseNode
     // NOTE: port index works the same as an array, therefore with 3 ports 0,1,2 removing port 1 will leave index 0 and 2 remaning
     private void DeletePort(Port port) 
     {
-        foreach (Port containerPort in outputContainer.Children().ToList())
-        {
-            
-            foreach (Edge edge in containerPort.connections)
-            {
-                if (edge != null)
-                { 
+        foreach (Port containerPort in outputContainer.Children().ToList()) {
+            foreach (Edge edge in containerPort.connections) {
+                if (edge != null) { 
                     edge.input.Disconnect(edge);
                     graphView.RemoveElement(edge);
                 }
             }
-            
         }
         graphView.ClearOldEdgeData(); // clear stored edge data
         choices.RemoveAll(choice => choice.index == outputContainer.IndexOf(port)); //remove choice from list

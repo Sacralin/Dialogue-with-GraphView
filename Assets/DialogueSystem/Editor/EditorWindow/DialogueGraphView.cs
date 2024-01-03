@@ -62,7 +62,7 @@ public class DialogueGraphView : GraphView
 
     private void AddStyles()
     {
-        var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/DialogueSystem/Editor/StyleSheets/GraphViewStyles.uss");
+        StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/DialogueSystem/Editor/StyleSheets/GraphViewStyles.uss");
         styleSheets.Add(styleSheet);
         //add node styles later
     }
@@ -98,7 +98,7 @@ public class DialogueGraphView : GraphView
         foreach(ChoiceData choice in node.choices) { //itterate over choices
             if (choice.edgeData != null && choice.edgeData.sourceNodeGuid != null && choice.edgeData.targetNodeGuid != null) { //check if edge data is present
                 BaseNode targetNode = new BaseNode(); //target node container
-                foreach(BaseNode nodes in nodes.ToList()) { //get all basenodes in nodes(graphview)
+                foreach (BaseNode nodes in nodes.ToList()) { //get all basenodes in nodes(graphview)
                     if(choice.edgeData.targetNodeGuid == nodes.GUID) { //find targetnode in graphview
                         targetNode = nodes; //store targetnode
                     }

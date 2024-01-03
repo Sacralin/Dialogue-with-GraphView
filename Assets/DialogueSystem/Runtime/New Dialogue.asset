@@ -13,63 +13,63 @@ MonoBehaviour:
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
   nodesData:
-  - nodeType: Start
-    customNodeName: CustomNodeName
-    GUID: ab7ef902-10c3-4b27-a4bd-08fb62117890
-    graphPosition: {x: 50, y: 50}
-    choices:
-    - index: 0
-      choice: 
-      portName: 8e91961c-cad7-4d4a-81a0-1804370d0a74
-      edgeData:
-        sourceNodeGuid: ab7ef902-10c3-4b27-a4bd-08fb62117890
-        targetNodeGuid: d0fc66ef-de66-4870-bb98-67df796bc596
-    text: Dialogue Text
-  - nodeType: BasicDialogue
-    customNodeName: CustomNodeName
-    GUID: 37b2b548-0222-4595-a0a7-80b67c08bb8d
-    graphPosition: {x: 773, y: 363}
-    choices:
-    - index: 0
-      choice: 
-      portName: 54ccdfb1-679b-4ba1-9862-e87ddb991cf3
-      edgeData:
-        sourceNodeGuid: 
-        targetNodeGuid: 
-    text: Dialogue Text
-  - nodeType: BasicDialogue
-    customNodeName: CustomNodeName
-    GUID: 393abe03-7dfc-4d8f-bcc2-911cb6701a10
-    graphPosition: {x: 719, y: 111}
-    choices:
-    - index: 0
-      choice: 
-      portName: 3ac723dd-ebd7-4a0f-9b7f-3b4ed123bd63
-      edgeData:
-        sourceNodeGuid: 
-        targetNodeGuid: 
-    text: Dialogue Text
-  - nodeType: Dialogue
-    customNodeName: CustomNodeName
-    GUID: d0fc66ef-de66-4870-bb98-67df796bc596
-    graphPosition: {x: 322, y: 186}
-    choices:
-    - index: 0
-      choice: 
-      portName: 3decc7ae-d8dd-4b94-84a7-cc03633eba86
-      edgeData:
-        sourceNodeGuid: d0fc66ef-de66-4870-bb98-67df796bc596
-        targetNodeGuid: 393abe03-7dfc-4d8f-bcc2-911cb6701a10
-    - index: 1
-      choice: 
-      portName: 58001684-d1cc-49db-9401-fc56b7caeb5c
-      edgeData:
-        sourceNodeGuid: 
-        targetNodeGuid: 
-    - index: 2
-      choice: 
-      portName: 4d07137b-b84b-41ba-ad53-fffa3c029cc2
-      edgeData:
-        sourceNodeGuid: d0fc66ef-de66-4870-bb98-67df796bc596
-        targetNodeGuid: 37b2b548-0222-4595-a0a7-80b67c08bb8d
-    text: Dialogue Text
+  - nodeTypeData: Start
+    customNodeNameData: CustomNodeName
+    GUIDData: 760c7bee-5e90-4f66-9435-5a69c6b0eeab
+    graphPositionData: {x: 50, y: 50}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 8345c5c0-cf92-4196-82d9-622a3b9b9ca8
+      edgeDataData:
+        sourceNodeGuidData: 760c7bee-5e90-4f66-9435-5a69c6b0eeab
+        targetNodeGuidData: bf4d2fb3-c1ed-4c63-8af5-a104f8d43baa
+    textData: Dialogue Text
+  - nodeTypeData: Dialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: bf4d2fb3-c1ed-4c63-8af5-a104f8d43baa
+    graphPositionData: {x: 344, y: 152}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 1b625c5a-bea4-4d23-b2cf-5183dcce9e3b
+      edgeDataData:
+        sourceNodeGuidData: bf4d2fb3-c1ed-4c63-8af5-a104f8d43baa
+        targetNodeGuidData: 6350eeb6-a7eb-4aac-8180-16ba49121af2
+    - indexData: 1
+      choiceData: 
+      portNameData: 5d4f38d9-f553-43c5-88d4-c0907ec02878
+      edgeDataData:
+        sourceNodeGuidData: 
+        targetNodeGuidData: 
+    - indexData: 2
+      choiceData: 
+      portNameData: 40b9797b-e266-4dac-b673-e498f51ceb33
+      edgeDataData:
+        sourceNodeGuidData: bf4d2fb3-c1ed-4c63-8af5-a104f8d43baa
+        targetNodeGuidData: 040101d6-d353-4841-98ff-04f167f56905
+    textData: Dialogue Text
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: 040101d6-d353-4841-98ff-04f167f56905
+    graphPositionData: {x: 754, y: 472}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 0acede2c-6ccb-49c2-849c-5fe11ae910e7
+      edgeDataData:
+        sourceNodeGuidData: 
+        targetNodeGuidData: 
+    textData: Dialogue Text
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: 6350eeb6-a7eb-4aac-8180-16ba49121af2
+    graphPositionData: {x: 700, y: 210}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 167f699a-3966-4647-818b-00bcab883cb9
+      edgeDataData:
+        sourceNodeGuidData: 
+        targetNodeGuidData: 
+    textData: Dialogue Text
