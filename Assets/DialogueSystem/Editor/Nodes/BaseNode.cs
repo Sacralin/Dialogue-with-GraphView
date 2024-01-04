@@ -79,6 +79,13 @@ public class BaseNode : Node
         dialogueTextField.multiline = true;
         dialogueTextField.style.height = 50;
         mainContainer.Add(dialogueTextField);
+        Button addFlagButton = new Button(() => AddFlagField()) { text = "Add Flag" };
+        mainContainer.Add(addFlagButton);
+    }
+
+    public void AddFlagField()
+    {
+        DropdownField dropdownField = new DropdownField();
     }
 
     

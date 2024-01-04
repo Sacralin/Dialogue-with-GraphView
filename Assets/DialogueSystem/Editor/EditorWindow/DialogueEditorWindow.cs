@@ -47,6 +47,9 @@ public class DialogueEditorWindow : EditorWindow
         Button newButton = new Button(() => { graphView.Refresh(); }) { text = "New" };
         toolbar.Add(newButton);
 
+        Button flagsButton = new Button(() => OpenFlagWindow()) { text = "Flags" };
+        toolbar.Add(flagsButton);
+
         Label label = new Label("FileName:");
         label.style.paddingTop = 2;
         label.style.paddingLeft = 20;
@@ -56,6 +59,12 @@ public class DialogueEditorWindow : EditorWindow
         toolbar.Add(dialogueName);
 
         rootVisualElement.Add(toolbar);
+    }
+
+    private void OpenFlagWindow()
+    {
+        FlagEditorWindow flagEditorWindow = (FlagEditorWindow)GetWindow(typeof(FlagEditorWindow));
+        //flagEditorWindow.titleContent = new GUIContent("Flag Editor");
     }
 
     [OnOpenAsset(1)]
