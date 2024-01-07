@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -21,8 +22,17 @@ public class DialogueGraphView : GraphView
         
     }
 
-    
+    public void Update()
+    {
+        foreach(BaseNode node in nodes)
+        {
+            node.Update();
+            ClearOldEdgeData();
+        }
+        
+    }
 
+    
     private void AddManipulators()
     {
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -31,6 +41,8 @@ public class DialogueGraphView : GraphView
         this.AddManipulator(new RectangleSelector());
         this.AddManipulator(CreateNodeContextualMenu("Add Node (BasicDialogue)", "BasicDialogueNode"));
         this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", "DialogueNode"));
+        this.AddManipulator(CreateNodeContextualMenu("Add Node (Flag)", "FlagNode"));
+        this.AddManipulator(CreateNodeContextualMenu("Add Node (Event)", "EventNode"));
     }
 
     private IManipulator CreateNodeContextualMenu(string actionTitle, string className)
@@ -163,6 +175,7 @@ public class DialogueGraphView : GraphView
         }
     }
 
+    
     
 
 }

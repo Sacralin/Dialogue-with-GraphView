@@ -58,6 +58,10 @@ public class NodeIO
         nodeData.textData = baseNode.text;
         nodeData.GUIDData = baseNode.GUID;
         nodeData.graphPositionData = baseNode.graphPosition;
+        nodeData.flagObjectData = baseNode.flagObject;
+        nodeData.triggerFlagData = baseNode.triggerFlag;
+        nodeData.triggerValueData = baseNode.triggerValue;
+        nodeData.eventTypeData = baseNode.eventType;
         nodeData.choicesData = new List<ChoiceDataSO>();
         foreach(ChoiceData baseChoice in baseNode.choices)
         {
@@ -91,6 +95,12 @@ public class NodeIO
             case "BasicDialogue":
                 newNode = new BasicDialogueNode();
                 break;
+            case "Flag":
+                newNode = new FlagNode();
+                break;
+            case "Event":
+                newNode = new EventNode();
+                break;
             default:
                 newNode = new BaseNode();
                 break;
@@ -100,6 +110,10 @@ public class NodeIO
         newNode.text = nodeData.textData;
         newNode.GUID = nodeData.GUIDData;
         newNode.graphPosition = nodeData.graphPositionData;
+        newNode.flagObject = nodeData.flagObjectData;
+        newNode.triggerFlag = nodeData.triggerFlagData;
+        newNode.triggerValue = nodeData.triggerValueData;
+        newNode.eventType = nodeData.eventTypeData;
         newNode.choices = new List<ChoiceData>();
         foreach (ChoiceDataSO choiceDataSO in nodeData.choicesData)
         {

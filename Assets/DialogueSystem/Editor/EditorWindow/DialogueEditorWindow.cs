@@ -26,6 +26,11 @@ public class DialogueEditorWindow : EditorWindow
         AddToolbar();
     }
 
+    public void OnGUI()
+    {
+        graphView.Update();
+    }
+
     private void AddGraphView()
     {
         graphView = new DialogueGraphView();
@@ -61,10 +66,12 @@ public class DialogueEditorWindow : EditorWindow
         rootVisualElement.Add(toolbar);
     }
 
+    
+
     private void OpenFlagWindow()
     {
         FlagEditorWindow flagEditorWindow = (FlagEditorWindow)GetWindow(typeof(FlagEditorWindow));
-        //flagEditorWindow.titleContent = new GUIContent("Flag Editor");
+        
     }
 
     [OnOpenAsset(1)]

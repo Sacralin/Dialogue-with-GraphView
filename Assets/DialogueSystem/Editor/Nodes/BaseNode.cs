@@ -14,6 +14,10 @@ public class BaseNode : Node
     public string text;
     public string GUID;
     public Vector2 graphPosition;
+    public string flagObject;
+    public string triggerFlag;
+    public string triggerValue;
+    public string eventType;
     
     public virtual void Initialize(Vector2 position)
     {
@@ -39,6 +43,11 @@ public class BaseNode : Node
         customNodeNameTextField.RegisterValueChangedCallback(value => { customNodeName = value.newValue; });
         customNodeNameTextField.SetValueWithoutNotify(customNodeName);
         titleContainer.Insert(1, customNodeNameTextField);
+    }
+
+    public virtual void Update()
+    {
+
     }
 
     public void GraphView(DialogueGraphView dialogueGraphView)
@@ -79,14 +88,10 @@ public class BaseNode : Node
         dialogueTextField.multiline = true;
         dialogueTextField.style.height = 50;
         mainContainer.Add(dialogueTextField);
-        Button addFlagButton = new Button(() => AddFlagField()) { text = "Add Flag" };
-        mainContainer.Add(addFlagButton);
+        
     }
 
-    public void AddFlagField()
-    {
-        DropdownField dropdownField = new DropdownField();
-    }
+    
 
     
 }

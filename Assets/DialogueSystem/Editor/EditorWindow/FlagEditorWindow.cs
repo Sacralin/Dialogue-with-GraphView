@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class FlagEditorWindow : EditorWindow
 {
@@ -50,15 +51,10 @@ public class FlagEditorWindow : EditorWindow
 
     public void AddFlagOptions()
     {
-        flagSODropdown = new DropdownField();
-        flagSODropdown.choices = flagSONames;
-        flagSODropdown.label = "Flag Objects:";
+        flagSODropdown = new DropdownField("Flag Objects:") { choices = flagSONames };
         rootVisualElement.Add(flagSODropdown);
         
-
-        flagList = new DropdownField();
-        flagList.choices = flagSOListData;
-        flagList.label = "Flag List:";
+        flagList = new DropdownField("Flag List:") { choices = flagSOListData };
         rootVisualElement.Add(flagList);
 
         nameLabel = new Label();

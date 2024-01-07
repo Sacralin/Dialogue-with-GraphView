@@ -10,8 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd71056ec74f1724caf662f84dd33776, type: 3}
-  m_Name: gfdg
+  m_Name: FlagList
   m_EditorClassIdentifier: 
-  flagDatas:
-  - flagName: New Flag
-    isFlagEnabled: 1
+  flagDatas: []

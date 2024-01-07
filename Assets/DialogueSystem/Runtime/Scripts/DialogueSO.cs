@@ -17,6 +17,10 @@ public class NodeDataSO
     public Vector2 graphPositionData;
     public List<ChoiceDataSO> choicesData;
     public string textData;
+    public string flagObjectData;
+    public string triggerFlagData;
+    public string triggerValueData;
+    public string eventTypeData;
 }
 
 [System.Serializable]
