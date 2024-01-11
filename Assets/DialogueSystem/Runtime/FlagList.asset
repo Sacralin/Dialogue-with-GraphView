@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd71056ec74f1724caf662f84dd33776, type: 3}
   m_Name: FlagList
   m_EditorClassIdentifier: 
-  flagDatas: []
+  flagDatas:
+  - flagName: Test Flag
+    isFlagEnabled: 0

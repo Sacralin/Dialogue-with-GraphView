@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class FlagEditorWindow : EditorWindow
 {

@@ -10,7 +10,8 @@ using UnityEngine.UIElements;
 
 public class DialogueGraphView : GraphView
 {
- 
+    
+
     public DialogueGraphView()
     {
         graphViewChanged += OnGraphViewChanged;
@@ -28,6 +29,7 @@ public class DialogueGraphView : GraphView
         {
             node.Update();
             ClearOldEdgeData();
+            //UpdateEdgeData();
         }
         
     }
@@ -43,6 +45,7 @@ public class DialogueGraphView : GraphView
         this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", "DialogueNode"));
         this.AddManipulator(CreateNodeContextualMenu("Add Node (Flag)", "FlagNode"));
         this.AddManipulator(CreateNodeContextualMenu("Add Node (Event)", "EventNode"));
+        this.AddManipulator(CreateNodeContextualMenu("Add Node (End)", "EndNode"));
     }
 
     private IManipulator CreateNodeContextualMenu(string actionTitle, string className)
@@ -157,8 +160,27 @@ public class DialogueGraphView : GraphView
         return changes;
     }
 
-    //clears edge data stored in choices - runs on Save() and deletePort()
-    //using this instead of the ongraphchanged callback because the callback doesnt run when the edge is deleted for some reason 
+    private void UpdateEdgeData()
+    {
+        foreach (var edge in edges)
+        {
+            // Populate edgedata on parent nodes
+            BaseNode input = (BaseNode)edge.input.node;
+            BaseNode output = (BaseNode)edge.output.node;
+            foreach (ChoiceData choice in output.choices)
+            {
+                if (choice.portName == edge.output.name)
+                {
+                    EdgeData edgeData = new EdgeData();
+                    edgeData.sourceNodeGuid = output.GUID;
+                    edgeData.targetNodeGuid = input.GUID;
+                    choice.edgeData = edgeData;
+                }
+            }
+        }
+    }
+
+    //clears edge data when nodes are disconnected  
     public void ClearOldEdgeData()
     {
         foreach(BaseNode node in nodes) {
@@ -176,6 +198,6 @@ public class DialogueGraphView : GraphView
     }
 
     
-    
+
 
 }

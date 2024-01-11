@@ -12,8 +12,9 @@ public class DialogueEditorWindow : EditorWindow
     private DialogueSO currentDialogue;
     private TextField dialogueName;
     private NodeIO nodeIO;
+    private NodeInspector nodeInspector;
 
-    
+
     [MenuItem("ZTools/Dialogue System/Dialogue Graph")]
     public static void Open()
     {
@@ -29,6 +30,7 @@ public class DialogueEditorWindow : EditorWindow
     public void OnGUI()
     {
         graphView.Update();
+        selectedNode();
     }
 
     private void AddGraphView()
@@ -37,6 +39,7 @@ public class DialogueEditorWindow : EditorWindow
         graphView.StretchToParentSize();
         rootVisualElement.Add(graphView);
         nodeIO = new NodeIO(graphView);
+        
     }
 
     private void AddToolbar()
@@ -55,6 +58,9 @@ public class DialogueEditorWindow : EditorWindow
         Button flagsButton = new Button(() => OpenFlagWindow()) { text = "Flags" };
         toolbar.Add(flagsButton);
 
+        Button inspectorButton = new Button(() => OpenInspectorWindow()) { text = "Node" };
+        toolbar.Add(inspectorButton);
+
         Label label = new Label("FileName:");
         label.style.paddingTop = 2;
         label.style.paddingLeft = 20;
@@ -66,7 +72,23 @@ public class DialogueEditorWindow : EditorWindow
         rootVisualElement.Add(toolbar);
     }
 
-    
+    private void OpenInspectorWindow()
+    {
+        nodeInspector = (NodeInspector)GetWindow(typeof(NodeInspector));
+        
+    }
+
+    private void selectedNode()
+    {
+        if (graphView.selection.Count != 0 && nodeInspector != null)
+        {
+            if (graphView.selection[0] is BaseNode)
+            {
+                nodeInspector.DisplayNode((BaseNode)graphView.selection[0]);
+            }
+        }
+    }
+
 
     private void OpenFlagWindow()
     {

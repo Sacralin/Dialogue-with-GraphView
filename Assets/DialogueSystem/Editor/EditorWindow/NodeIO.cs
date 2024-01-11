@@ -14,17 +14,34 @@ public class NodeIO
 
     public void Save(string filename)
     {
-        DialogueSO dialogueSO = ScriptableObject.CreateInstance<DialogueSO>();
-
-        graphView.ClearOldEdgeData();
         List<NodeDataSO> allNodes = new List<NodeDataSO>();
         foreach (BaseNode node in graphView.nodes.ToList())
         {
             NodeDataSO nodeData = FromBaseNode(node);
             allNodes.Add(nodeData);
         }
-        dialogueSO.nodesData = allNodes;
-        AssetDatabase.CreateAsset(dialogueSO, $"Assets/DialogueSystem/Runtime/{filename}.asset");
+        bool assetFound = false;
+        string[] assetList = AssetDatabase.FindAssets("t:DialogueSO"); // find all flag stores in project, returns asset GUIDs
+        if (assetList.Length != 0)
+        {
+            foreach (string asset in assetList)
+            {
+                string SOpath = AssetDatabase.GUIDToAssetPath(asset); // convert GUID into asset path
+                DialogueSO diaSO = AssetDatabase.LoadAssetAtPath<DialogueSO>(SOpath); // load asset from path
+                if(diaSO.name == filename)
+                {
+                    diaSO.nodesData = allNodes;
+                    EditorUtility.SetDirty(diaSO);
+                    assetFound = true;
+                }
+            }
+        }
+        if (!assetFound) 
+        {
+            DialogueSO dialogueSO = ScriptableObject.CreateInstance<DialogueSO>();
+            dialogueSO.nodesData = allNodes;
+            AssetDatabase.CreateAsset(dialogueSO, $"Assets/DialogueSystem/Runtime/{filename}.asset");
+        }
         AssetDatabase.SaveAssets();
     }
 

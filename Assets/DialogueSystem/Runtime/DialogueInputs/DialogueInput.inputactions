@@ -1,0 +1,54 @@
+{
+    "name": "DialogueInput",
+    "maps": [
+        {
+            "name": "DialogueControls",
+            "id": "52e64428-92f0-4245-ab76-40bc0f7fe2d2",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Value",
+                    "id": "2e7735bd-36d7-4d6a-bae0-f5f8d36df844",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "NextDialogue",
+                    "type": "Value",
+                    "id": "4350769d-fb47-465a-bc47-9e9e9374f424",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "956d4c59-8e08-4873-a3ea-d916d7d6bd29",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7921ece9-cd1e-482a-95bc-c76da64d1f4a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialogue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

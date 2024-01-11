@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
     public DialogueSO dialogueSO;
     private DialogueManager dialogueManager;
+    private DialogueInput dialogueInput;
 
     void Start()
     {
+        dialogueInput = new DialogueInput();
+        dialogueInput.Enable();
         GameObject dialogueManagerObject = GameObject.Find("DialogueManager");
         if (dialogueManagerObject != null)
         {
@@ -28,13 +32,21 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if(Input.GetKeyDown(KeyCode.E)) 
+            float interact = dialogueInput.DialogueControls.Interact.ReadValue<float>();
+            if (interact > 0 ) 
             {
-                Debug.Log("Player Interacted!");
-
                 dialogueManager.StartDialogue(dialogueSO, true);
             }
             
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            dialogueManager.HasExited();
+
         }
     }
 }
