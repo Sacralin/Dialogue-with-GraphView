@@ -25,6 +25,7 @@ public class BaseNode : Node
         nodeType = "NodeType";
         customNodeName = "CustomNodeName";
         choices = new List<ChoiceData>();
+        
         text = "Dialogue Text";
         SetPosition(new Rect(position, Vector2.zero));
         GUID = Guid.NewGuid().ToString();
@@ -55,21 +56,29 @@ public class BaseNode : Node
         graphView = dialogueGraphView;
     }
 
-    public void AddOutputPort()
+    public void AddOutputPort(string portName = "Output")
     {
         
         Port outputPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
-        outputPort.portName = "Output";
+        outputPort.portName = portName;
         outputPort.name = Guid.NewGuid().ToString();
         outputContainer.Add(outputPort);
-        if (!(choices != null && choices.Count > 0))
+        if (choices == null || choices.Count == 0)
         {
             ChoiceData data = new ChoiceData();
             data.index = 0;
             data.portName = outputPort.name;
             choices.Add(data);
         }
-        
+
+        if (portName == "False") //this is the second port on a flagNode - need to tidy this up coz feels messy 
+        {
+            ChoiceData data = new ChoiceData();
+            data.index = 1;
+            data.portName = outputPort.name;
+            choices.Add(data);
+        }
+
     }
 
     public void AddInputPort(Port.Capacity capacity = Port.Capacity.Single)

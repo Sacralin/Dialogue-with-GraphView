@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class NodeIO
 {
@@ -52,8 +55,24 @@ public class NodeIO
         foreach (var nodeDataSO in dialogue.nodesData) {
             BaseNode newNode = CreateNode(nodeDataSO);
             newNode.RefreshExpandedState();
+            //Debug.Log(nodeDataSO.graphPositionData + nodeDataSO.nodeTypeData + "Node");
+            //BaseNode baseNode = graphView.CreateNode(nodeDataSO.graphPositionData, nodeDataSO.nodeTypeData+"Node");
+            //SetBaseNode(baseNode, nodeDataSO);
+            //graphView.AddElement(baseNode);
+
+
+
+
         }
-        foreach (BaseNode node in graphView.nodes) { graphView.ConnectNodes(node); }
+        foreach (BaseNode node in graphView.nodes) 
+        {
+            foreach (ChoiceData choiceData in node.choices)
+            {
+                Port targetPort = node.outputContainer.Query<Port>().AtIndex(choiceData.index);
+                targetPort.name = choiceData.portName;
+            }
+            graphView.ConnectNodes(node); 
+        }
     }
 
     private BaseNode CreateNode(NodeDataSO nodeData)
@@ -65,7 +84,7 @@ public class NodeIO
         graphView.AddElement(newNode);
         return newNode;
     }
-    
+
     // switch data type for storage and instansing 
     private static NodeDataSO FromBaseNode(BaseNode baseNode)
     {
@@ -80,18 +99,26 @@ public class NodeIO
         nodeData.triggerValueData = baseNode.triggerValue;
         nodeData.eventTypeData = baseNode.eventType;
         nodeData.choicesData = new List<ChoiceDataSO>();
-        foreach(ChoiceData baseChoice in baseNode.choices)
+        if(baseNode.choices.Count != 0)
         {
-            ChoiceDataSO choiceDataSO = new ChoiceDataSO();
-            choiceDataSO.choiceData = baseChoice.choice;
-            choiceDataSO.portNameData = baseChoice.portName;
-            choiceDataSO.indexData = baseChoice.index;
-            EdgeDataSO edgeDataSO = new EdgeDataSO();
-            edgeDataSO.targetNodeGuidData = baseChoice.edgeData.targetNodeGuid;
-            edgeDataSO.sourceNodeGuidData = baseChoice.edgeData.sourceNodeGuid;
-            choiceDataSO.edgeDataData = edgeDataSO;
-            nodeData.choicesData.Add(choiceDataSO);
+            foreach (ChoiceData baseChoice in baseNode.choices)
+            {
+                ChoiceDataSO choiceDataSO = new ChoiceDataSO();
+                choiceDataSO.choiceData = baseChoice.choice;
+                choiceDataSO.portNameData = baseChoice.portName;
+                choiceDataSO.indexData = baseChoice.index;
+                if(baseChoice.edgeData != null)
+                {
+                    EdgeDataSO edgeDataSO = new EdgeDataSO();
+                    edgeDataSO.targetNodeGuidData = baseChoice.edgeData.targetNodeGuid;
+                    edgeDataSO.sourceNodeGuidData = baseChoice.edgeData.sourceNodeGuid;
+                    choiceDataSO.edgeDataData = edgeDataSO;
+                    nodeData.choicesData.Add(choiceDataSO);
+                }
+                
+            }
         }
+        
         return nodeData;
     }
 
@@ -147,6 +174,34 @@ public class NodeIO
 
         }
         return newNode;
+    }
+
+    private void SetBaseNode(BaseNode newNode, NodeDataSO nodeData)
+    {
+        newNode.nodeType = nodeData.nodeTypeData;
+        newNode.customNodeName = nodeData.customNodeNameData;
+        newNode.text = nodeData.textData;
+        newNode.GUID = nodeData.GUIDData;
+        newNode.graphPosition = nodeData.graphPositionData;
+        newNode.flagObject = nodeData.flagObjectData;
+        newNode.triggerFlag = nodeData.triggerFlagData;
+        newNode.triggerValue = nodeData.triggerValueData;
+        newNode.eventType = nodeData.eventTypeData;
+        newNode.choices = new List<ChoiceData>();
+        foreach (ChoiceDataSO choiceDataSO in nodeData.choicesData)
+        {
+            ChoiceData choice = new ChoiceData();
+            choice.choice = choiceDataSO.choiceData;
+            //choice.portName = choiceDataSO.portNameData;
+            choice.index = choiceDataSO.indexData;
+            EdgeData edgeData = new EdgeData();
+            edgeData.targetNodeGuid = choiceDataSO.edgeDataData.targetNodeGuidData;
+            edgeData.sourceNodeGuid = choiceDataSO.edgeDataData.sourceNodeGuidData;
+            choice.edgeData = edgeData;
+            newNode.choices.Add(choice);
+
+
+        }
     }
 
 }

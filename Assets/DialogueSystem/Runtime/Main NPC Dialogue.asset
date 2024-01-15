@@ -1,0 +1,209 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f9244a6d702034bac6e5aed2b8167a, type: 3}
+  m_Name: Main NPC Dialogue
+  m_EditorClassIdentifier: 
+  nodesData:
+  - nodeTypeData: Start
+    customNodeNameData: dude
+    GUIDData: 04de9da0-3358-4514-88b3-15d5b78525dd
+    graphPositionData: {x: 50, y: 50}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 
+      edgeDataData:
+        sourceNodeGuidData: 04de9da0-3358-4514-88b3-15d5b78525dd
+        targetNodeGuidData: 08b16024-880b-4ac4-aaec-a7bcb45655cb
+    textData: Dialogue Text
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: 1bcbaa6d-e931-4c8a-938e-1c23da198101
+    graphPositionData: {x: 443, y: 50}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: c923f1e4-2042-4671-84f3-fecf0f81c163
+      edgeDataData:
+        sourceNodeGuidData: 1bcbaa6d-e931-4c8a-938e-1c23da198101
+        targetNodeGuidData: 1c2ac250-fb39-4212-a060-316fe7c3d85f
+    textData: Lets see if this works!
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: Dialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: 1c2ac250-fb39-4212-a060-316fe7c3d85f
+    graphPositionData: {x: 692, y: 50}
+    choicesData:
+    - indexData: 0
+      choiceData: Go for a walk
+      portNameData: a36d0818-179c-4c65-81d1-32cc4b8abe06
+      edgeDataData:
+        sourceNodeGuidData: 1c2ac250-fb39-4212-a060-316fe7c3d85f
+        targetNodeGuidData: 57fd0376-cfc1-4656-83e8-bec8ecced53d
+    - indexData: 1
+      choiceData: Talk to a pole
+      portNameData: 65f1365c-1ee7-4d13-94c5-f5a362c3e196
+      edgeDataData:
+        sourceNodeGuidData: 1c2ac250-fb39-4212-a060-316fe7c3d85f
+        targetNodeGuidData: 2539835d-4463-4131-9d1c-ef6448fcae08
+    textData: What would you like to do?
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: 08b16024-880b-4ac4-aaec-a7bcb45655cb
+    graphPositionData: {x: 249, y: 50}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 
+      edgeDataData:
+        sourceNodeGuidData: 08b16024-880b-4ac4-aaec-a7bcb45655cb
+        targetNodeGuidData: 1bcbaa6d-e931-4c8a-938e-1c23da198101
+    textData: hi
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: walk true
+    GUIDData: a21ffeb7-038e-443f-b2e6-75007113e1ec
+    graphPositionData: {x: 1208, y: -104}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: db5ad8dc-b400-4e35-b9eb-58e3efdac111
+      edgeDataData:
+        sourceNodeGuidData: a21ffeb7-038e-443f-b2e6-75007113e1ec
+        targetNodeGuidData: c6adc2af-4bf6-4212-b512-915018d14b4f
+    textData: 'You just triggered an event node that
+
+      caused this conversation
+      to change!'
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: walk false (default)
+    GUIDData: 3eab7f75-aadd-4744-ba79-f2f7edf019d0
+    graphPositionData: {x: 1208, y: 25}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 027ea9f5-0563-4ffa-afb5-43e359724093
+      edgeDataData:
+        sourceNodeGuidData: 3eab7f75-aadd-4744-ba79-f2f7edf019d0
+        targetNodeGuidData: c6adc2af-4bf6-4212-b512-915018d14b4f
+    textData: Go and walk into the room
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: talk true
+    GUIDData: 095f0ec6-931e-4468-bdb5-043c928c137f
+    graphPositionData: {x: 1208, y: 159}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 520d579e-81c5-4720-bacb-5b470ff91580
+      edgeDataData:
+        sourceNodeGuidData: 095f0ec6-931e-4468-bdb5-043c928c137f
+        targetNodeGuidData: c6adc2af-4bf6-4212-b512-915018d14b4f
+    textData: 'Talking to the pole triggered an event
+
+      node that changed the
+      conversation!'
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: talk false (default)
+    GUIDData: fc8f6952-f027-4aec-9c3a-64a72c27c596
+    graphPositionData: {x: 1208, y: 288}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: abbc1993-e078-4c5f-9332-66420d8f4070
+      edgeDataData:
+        sourceNodeGuidData: fc8f6952-f027-4aec-9c3a-64a72c27c596
+        targetNodeGuidData: c6adc2af-4bf6-4212-b512-915018d14b4f
+    textData: Go and talk to the pole
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: End
+    customNodeNameData: CustomNodeName
+    GUIDData: c6adc2af-4bf6-4212-b512-915018d14b4f
+    graphPositionData: {x: 1478, y: 159}
+    choicesData: []
+    textData: Dialogue Text
+    flagObjectData: 
+    triggerFlagData: 1c2ac250-fb39-4212-a060-316fe7c3d85f
+    triggerValueData: 
+    eventTypeData: Return To Node
+  - nodeTypeData: Flag
+    customNodeNameData: talk
+    GUIDData: 2539835d-4463-4131-9d1c-ef6448fcae08
+    graphPositionData: {x: 938, y: 159}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 7b60c3b9-4077-40f8-aab2-c64ed9eee175
+      edgeDataData:
+        sourceNodeGuidData: 2539835d-4463-4131-9d1c-ef6448fcae08
+        targetNodeGuidData: 095f0ec6-931e-4468-bdb5-043c928c137f
+    - indexData: 1
+      choiceData: 
+      portNameData: 8fda550b-4dd6-4bbd-b477-e6a6f68d65d0
+      edgeDataData:
+        sourceNodeGuidData: 2539835d-4463-4131-9d1c-ef6448fcae08
+        targetNodeGuidData: fc8f6952-f027-4aec-9c3a-64a72c27c596
+    textData: Dialogue Text
+    flagObjectData: FlagList
+    triggerFlagData: talk
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: Flag
+    customNodeNameData: walk
+    GUIDData: 57fd0376-cfc1-4656-83e8-bec8ecced53d
+    graphPositionData: {x: 938, y: 13}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 287a97d7-c773-47ac-baf7-7c770955ddfd
+      edgeDataData:
+        sourceNodeGuidData: 57fd0376-cfc1-4656-83e8-bec8ecced53d
+        targetNodeGuidData: a21ffeb7-038e-443f-b2e6-75007113e1ec
+    - indexData: 1
+      choiceData: 
+      portNameData: 97f6b945-2a16-4320-9781-4f59d815688a
+      edgeDataData:
+        sourceNodeGuidData: 57fd0376-cfc1-4656-83e8-bec8ecced53d
+        targetNodeGuidData: 3eab7f75-aadd-4744-ba79-f2f7edf019d0
+    textData: Dialogue Text
+    flagObjectData: FlagList
+    triggerFlagData: walk
+    triggerValueData: 
+    eventTypeData: 

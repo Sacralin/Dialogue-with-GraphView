@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f9244a6d702034bac6e5aed2b8167a, type: 3}
+  m_Name: Stick man 1
+  m_EditorClassIdentifier: 
+  nodesData:
+  - nodeTypeData: Dialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: d9e86735-261d-4359-81bb-bef02d86caf5
+    graphPositionData: {x: 220, y: 22}
+    choicesData:
+    - indexData: 0
+      choiceData: Yes
+      portNameData: 048834d3-ef09-4787-b8b5-ee5d37c96a16
+      edgeDataData:
+        sourceNodeGuidData: d9e86735-261d-4359-81bb-bef02d86caf5
+        targetNodeGuidData: f7f4544c-3f10-4f21-be7e-541ed049fdb0
+    - indexData: 1
+      choiceData: No
+      portNameData: d098d338-1c0b-48f7-800b-7d8557070197
+      edgeDataData:
+        sourceNodeGuidData: d9e86735-261d-4359-81bb-bef02d86caf5
+        targetNodeGuidData: bb9efa0c-daf7-438c-80c9-37b55d90cb85
+    textData: Hey Do you want to hear a joke?
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: bb9efa0c-daf7-438c-80c9-37b55d90cb85
+    graphPositionData: {x: 476, y: 122}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: bac951ac-017c-4c93-9769-85e0f1e62b8d
+      edgeDataData:
+        sourceNodeGuidData: bb9efa0c-daf7-438c-80c9-37b55d90cb85
+        targetNodeGuidData: a48b7adc-de7a-4464-8070-b8ccddc1f853
+    textData: "Fair enough, you can talk to the other \nguy now."
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: Start
+    customNodeNameData: CustomNodeName
+    GUIDData: 5ec3df32-b59c-43c5-9415-d26a6c361c59
+    graphPositionData: {x: 50, y: 50}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 7632fb3f-ab0c-4482-8f80-4bc51d8245dc
+      edgeDataData:
+        sourceNodeGuidData: 5ec3df32-b59c-43c5-9415-d26a6c361c59
+        targetNodeGuidData: d9e86735-261d-4359-81bb-bef02d86caf5
+    textData: Dialogue Text
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: Dialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: f7f4544c-3f10-4f21-be7e-541ed049fdb0
+    graphPositionData: {x: 476, y: -54}
+    choicesData:
+    - indexData: 0
+      choiceData: I dont know
+      portNameData: 27dcf665-356a-467b-9e3a-7a75e8f3aab4
+      edgeDataData:
+        sourceNodeGuidData: f7f4544c-3f10-4f21-be7e-541ed049fdb0
+        targetNodeGuidData: cd1caabb-4c35-4bec-94df-2cb11a6afc43
+    textData: 'Why do programmers prefer dark
+
+      mode?'
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: cd1caabb-4c35-4bec-94df-2cb11a6afc43
+    graphPositionData: {x: 747, y: -54}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 5fc946b3-4feb-41b2-9be0-7574eee8a24c
+      edgeDataData:
+        sourceNodeGuidData: cd1caabb-4c35-4bec-94df-2cb11a6afc43
+        targetNodeGuidData: d08346ac-6fb1-47bf-bdae-79ec3e6ff104
+    textData: Because light attacts bugs!
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: d08346ac-6fb1-47bf-bdae-79ec3e6ff104
+    graphPositionData: {x: 987, y: -54}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: b304fb31-f8e6-4f62-91df-79a763911396
+      edgeDataData:
+        sourceNodeGuidData: d08346ac-6fb1-47bf-bdae-79ec3e6ff104
+        targetNodeGuidData: a48b7adc-de7a-4464-8070-b8ccddc1f853
+    textData: You can talk to the other stick now!
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: Event
+    customNodeNameData: CustomNodeName
+    GUIDData: a48b7adc-de7a-4464-8070-b8ccddc1f853
+    graphPositionData: {x: 747, y: 91}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 0d0338a2-e0f0-463b-9eb1-6ac6544b7625
+      edgeDataData:
+        sourceNodeGuidData: a48b7adc-de7a-4464-8070-b8ccddc1f853
+        targetNodeGuidData: baee24cb-ce21-48be-ae23-0240c82ce182
+    textData: Dialogue Text
+    flagObjectData: FlagList
+    triggerFlagData: talk
+    triggerValueData: True
+    eventTypeData: Toggle Flag Value
+  - nodeTypeData: End
+    customNodeNameData: CustomNodeName
+    GUIDData: baee24cb-ce21-48be-ae23-0240c82ce182
+    graphPositionData: {x: 1257, y: 64}
+    choicesData: []
+    textData: Dialogue Text
+    flagObjectData: 
+    triggerFlagData: 5ec3df32-b59c-43c5-9415-d26a6c361c59
+    triggerValueData: 
+    eventTypeData: Return To Node

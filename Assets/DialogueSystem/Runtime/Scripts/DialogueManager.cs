@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -56,6 +57,10 @@ public class DialogueManager : MonoBehaviour
     {
         hasPlayerInteracted = playerInteracted;
         //dialogueSO = ScriptableObject.CreateInstance<DialogueSO>();
+        if(dialogue != dialogueSO)
+        {
+            currentNode = null;
+        }
         dialogueSO = dialogue;
         if (currentNode == null) //if this is first interaction 
         {
@@ -125,8 +130,9 @@ public class DialogueManager : MonoBehaviour
                             {
                                 flagData.isFlagEnabled = false;
                             }
-                            EditorUtility.SetDirty(targetFlagSO);
+                            EditorUtility.SetDirty(targetFlagSO); 
                             AssetDatabase.SaveAssets();
+                            GetNextNode();
 
                         }
                     }
@@ -143,23 +149,19 @@ public class DialogueManager : MonoBehaviour
         {
             if(flagData.flagName == currentNode.triggerFlagData)
             {
-                if(flagData.isFlagEnabled.ToString() == currentNode.triggerValueData)
+                Debug.Log(flagData.isFlagEnabled);
+                if (flagData.isFlagEnabled)
                 {
-                    GetNextNode();
-                    Debug.Log("Flag node moving to next node");
+                    //get next node port/choices 0
+                    GetNextNode(0);
                 }
                 else
                 {
-                    hasPlayerInteracted = false;
-                    currentNode = lastDialogueNode;
-                    //EnableAllOtherControls();
-                    Debug.Log("Flag node wall hit");
-                    
-
+                    //get next node port/choices 1
+                    GetNextNode(1);
                 }
             }
         }
-        
     }
 
     private void RunBasicDialogueNode()
@@ -183,8 +185,17 @@ public class DialogueManager : MonoBehaviour
 
     private void RunEndNode()
     {
-        Debug.Log("End of node reached.");
         hasPlayerInteracted = false;
+        if (currentNode.eventTypeData == "Return To Node")
+        {
+            foreach (NodeDataSO node in dialogueSO.nodesData) 
+            {
+                if (currentNode.triggerFlagData == node.triggerFlagData) 
+                {
+                    currentNode = node; 
+                }
+            }
+        }
     }
 
     private void RunDialogueNode()
@@ -230,10 +241,12 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
         dialoguePanelObject.SetActive(false);
         choicePanelObject.SetActive(false);
+        areButtonsAdded = false;
     }
 
     private void GetNextNode(int choice = 0)
     {
+        Debug.Log(choice);
         string nextNode = currentNode.choicesData[choice].edgeDataData.targetNodeGuidData;
         foreach(NodeDataSO node in dialogueSO.nodesData)
         {

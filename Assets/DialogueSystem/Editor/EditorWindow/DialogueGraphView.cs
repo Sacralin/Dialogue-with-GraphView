@@ -56,7 +56,7 @@ public class DialogueGraphView : GraphView
         return contextualMenuManipulator;
     }
 
-    private BaseNode CreateNode(Vector2 position, string classname)
+    public BaseNode CreateNode(Vector2 position, string classname)
     {
         Type nodeType = Type.GetType(classname);
         BaseNode node = (BaseNode)Activator.CreateInstance(nodeType);
@@ -160,34 +160,16 @@ public class DialogueGraphView : GraphView
         return changes;
     }
 
-    private void UpdateEdgeData()
-    {
-        foreach (var edge in edges)
-        {
-            // Populate edgedata on parent nodes
-            BaseNode input = (BaseNode)edge.input.node;
-            BaseNode output = (BaseNode)edge.output.node;
-            foreach (ChoiceData choice in output.choices)
-            {
-                if (choice.portName == edge.output.name)
-                {
-                    EdgeData edgeData = new EdgeData();
-                    edgeData.sourceNodeGuid = output.GUID;
-                    edgeData.targetNodeGuid = input.GUID;
-                    choice.edgeData = edgeData;
-                }
-            }
-        }
-    }
+    
 
     //clears edge data when nodes are disconnected  
     public void ClearOldEdgeData()
     {
-        foreach(BaseNode node in nodes) {
+        foreach (BaseNode node in nodes) {
             var outputPorts = node.outputContainer.Query<Port>().ToList();
             foreach (ChoiceData choice in node.choices) {
                 foreach (var outputPort in outputPorts) {
-                    if (outputPort.name == choice.portName) {
+                    if (outputPort.name == choice.portName) { // why did i do it this way, i think this is why its not loading properly
                         if(!outputPort.connected) {
                             choice.edgeData = new EdgeData();
                         }

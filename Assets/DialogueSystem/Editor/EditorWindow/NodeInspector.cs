@@ -24,36 +24,30 @@ public class NodeInspector : EditorWindow
 
     public void OnEnable()
     {
-
         AddUI();
     }
 
     public void DisplayNode(BaseNode node)
     {
         List<string> choicesToString = new List<string>();
-        if (node != currentNode)
-        { choicesToString.Clear(); }
-
+        if (node != currentNode) { choicesToString.Clear(); } //clear list on new node
         currentNode = node;
         typeLabel.text = $"{typeLabel.name} {node.nodeType}";
         customLabel.text = $"{customLabel.name} {node.customNodeName}";
         GUIDLabel.text = $"{GUIDLabel.name} {node.GUID}";
-        foreach (ChoiceData choice in node.choices)
+        if (node.choices.Count != 0)
         {
-            choicesToString.Add(choice.index.ToString());
+            foreach (ChoiceData choice in node.choices) { choicesToString.Add(choice.index.ToString()); } //get list of choice index strings
+            choicesDropdown.choices = choicesToString;
+            if (choicesDropdown.value == null || int.Parse(choicesDropdown.value) > choicesToString.Count) { choicesDropdown.value = choicesToString[0]; }
+            if (choicesDropdown.value != null)
+            {
+                sourceLabel.text = $"{sourceLabel.name} {node.choices[int.Parse(choicesDropdown.value)].edgeData.sourceNodeGuid}";
+                targetLabel.text = $"{targetLabel.name} {node.choices[int.Parse(choicesDropdown.value)].edgeData.targetNodeGuid}";
+            }
         }
-        choicesDropdown.choices = choicesToString;
-        if (choicesDropdown.value == null) { choicesDropdown.value = choicesToString[0]; }
-        if (choicesDropdown.value != null)
-        {
-            sourceLabel.text = $"{sourceLabel.name} {node.choices[int.Parse(choicesDropdown.value)].edgeData.sourceNodeGuid}";
-            targetLabel.text = $"{targetLabel.name} {node.choices[int.Parse(choicesDropdown.value)].edgeData.targetNodeGuid}";
-        }
-
 
     }
-
-    
 
     private void AddUI()
     {

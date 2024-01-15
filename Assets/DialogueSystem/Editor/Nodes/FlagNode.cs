@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -21,7 +22,8 @@ public class FlagNode : BaseNode
     {
         base.Draw();
         AddInputPort(Port.Capacity.Multi);
-        AddOutputPort();
+        AddOutputPort("True");
+        AddOutputPort("False"); 
         AddFlagField();
         flagNodeTools = new FlagNodeTools();
         flagObjectDropdown.value = flagObject;
@@ -40,6 +42,8 @@ public class FlagNode : BaseNode
         triggerValue = triggerValueDropdown.value;
     }
 
+    
+
 
     public void AddFlagField()
     {
@@ -48,7 +52,7 @@ public class FlagNode : BaseNode
         triggerFlagDropdown = new DropdownField("Trigger Flag:");
         mainContainer.Add(triggerFlagDropdown);
         triggerValueDropdown = new DropdownField("Trigger Value:");
-        mainContainer.Add(triggerValueDropdown);
+        //mainContainer.Add(triggerValueDropdown);
 
     }
 

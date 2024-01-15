@@ -1,0 +1,11 @@
+Consecutive BasicDialogue nodes fail to execute (second node)
+
+Current method of saving flag state is permanent and does not reset on run
+
+when attempting to talk to the same npc after a dialogue is complete, the dialogue does not run
+
+imported character controller hitbox height not adjusting properly
+
+node creation position is not relative to current screen space
+
+text on any type of dialogue node could do with wrapping 
