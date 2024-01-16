@@ -9,7 +9,7 @@
                     "name": "Interact",
                     "type": "Value",
                     "id": "2e7735bd-36d7-4d6a-bae0-f5f8d36df844",
-                    "expectedControlType": "",
+                    "expectedControlType": "Digital",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true

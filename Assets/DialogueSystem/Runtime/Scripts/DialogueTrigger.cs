@@ -8,6 +8,7 @@ public class DialogueTrigger : MonoBehaviour
     public DialogueSO dialogueSO;
     private DialogueManager dialogueManager;
     private DialogueInput dialogueInput;
+    private bool keyReleased = true;
 
     void Start()
     {
@@ -32,11 +33,24 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            float interact = dialogueInput.DialogueControls.Interact.ReadValue<float>();
-            if (interact > 0 ) 
-            {
-                dialogueManager.StartDialogue(dialogueSO, true);
-            }
+            
+                float interact = dialogueInput.DialogueControls.Interact.ReadValue<float>();
+                if (interact > 0 && keyReleased)
+                {
+                    
+                    keyReleased = false;
+                    dialogueManager.StartDialogue(dialogueSO, true);
+                }
+                else
+                {
+                    if(interact == 0)
+                    {
+                        keyReleased = true;
+                    }
+                    
+                }
+            
+            
             
         }
     }

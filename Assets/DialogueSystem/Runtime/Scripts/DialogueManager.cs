@@ -15,15 +15,15 @@ public class DialogueManager : MonoBehaviour
     //public List<string> mapsToDisable = new List<string>();
     private DialogueInput dialogueInput;
     private DialogueSO dialogueSO;
-    private NodeDataSO lastDialogueNode;
     private NodeDataSO currentNode;
     public TMP_Text dialogueText;
     public Button choiceButtonPrefab;
     public Transform choicePanel;
     public GameObject dialoguePanelObject;
     public GameObject choicePanelObject;
-    private bool hasPlayerInteracted;
+    private bool hasDialogueStarted;
     private bool areButtonsAdded;
+    private bool keyReleased;
 
 
     // Start is called before the first frame update
@@ -38,10 +38,10 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentNode != null)
-        {
-            Debug.Log(currentNode.nodeTypeData);
-        }
+        //if (currentNode != null)
+        //{
+        //    Debug.Log(currentNode.nodeTypeData);
+        //}
         RunCurrentNode();
         
         
@@ -53,9 +53,9 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-    public void StartDialogue(DialogueSO dialogue,bool playerInteracted = false ) //this might reset every time so might have to set a var in dialogueSO to keep the position
+    public void StartDialogue(DialogueSO dialogue,bool dialogueStarted = false ) //this might reset every time so might have to set a var in dialogueSO to keep the position
     {
-        hasPlayerInteracted = playerInteracted;
+        hasDialogueStarted = dialogueStarted;
         //dialogueSO = ScriptableObject.CreateInstance<DialogueSO>();
         if(dialogue != dialogueSO)
         {
@@ -166,26 +166,46 @@ public class DialogueManager : MonoBehaviour
 
     private void RunBasicDialogueNode()
     {
-        if(hasPlayerInteracted)
+        
+        if(hasDialogueStarted)
         {
-            //DiableAllOtherControls();
             dialoguePanelObject.SetActive(true);
             dialogueText.text = currentNode.textData;
 
-            if (dialogueInput.DialogueControls.Interact.triggered)
+            float interact = dialogueInput.DialogueControls.Interact.ReadValue<float>();
+            if (interact > 0 && keyReleased)
             {
-                lastDialogueNode = currentNode;
+
+                keyReleased = false;
                 dialogueText.text = "";
                 dialoguePanelObject.SetActive(false);
                 GetNextNode();
             }
+            else
+            {
+                if (interact == 0)
+                {
+                    keyReleased = true;
+                }
+
+            }
+
+            //DiableAllOtherControls();
+           
+            /*
+            if (dialogueInput.DialogueControls.Interact.triggered)
+            {
+                dialogueText.text = "";
+                dialoguePanelObject.SetActive(false);
+                GetNextNode();
+            }*/
         }
         
     }
 
     private void RunEndNode()
     {
-        hasPlayerInteracted = false;
+        hasDialogueStarted = false;
         if (currentNode.eventTypeData == "Return To Node")
         {
             foreach (NodeDataSO node in dialogueSO.nodesData) 
@@ -200,7 +220,7 @@ public class DialogueManager : MonoBehaviour
 
     private void RunDialogueNode()
     {
-        if (hasPlayerInteracted)
+        if (hasDialogueStarted)
         {
             //DiableAllOtherControls();
             dialogueText.text = currentNode.textData;
@@ -220,7 +240,6 @@ public class DialogueManager : MonoBehaviour
                         GetNextNode(choices.indexData); 
 
                     });
-                    lastDialogueNode = currentNode;
                 }
                 areButtonsAdded = true;
             }

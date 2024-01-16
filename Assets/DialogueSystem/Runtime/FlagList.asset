@@ -15,7 +15,10 @@ MonoBehaviour:
   flagDatas:
   - flagName: Test Flag
     isFlagEnabled: 0
+    flagDefaultState: 0
   - flagName: walk
     isFlagEnabled: 0
+    flagDefaultState: 0
   - flagName: talk
     isFlagEnabled: 1
+    flagDefaultState: 0

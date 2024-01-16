@@ -1,8 +1,6 @@
-Consecutive BasicDialogue nodes fail to execute (second node)
+Current method of saving flag state is permanent and does not reset on run - FlagNodeTools
 
-Current method of saving flag state is permanent and does not reset on run
-
-when attempting to talk to the same npc after a dialogue is complete, the dialogue does not run
+Current dialogue node not saved after a conversation - test this before you change anything just to be sure 
 
 imported character controller hitbox height not adjusting properly
 

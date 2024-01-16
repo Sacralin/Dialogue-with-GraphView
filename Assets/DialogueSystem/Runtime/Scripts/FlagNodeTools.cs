@@ -6,6 +6,14 @@ public class FlagNodeTools
     public List<FlagSO> GetAllFlagAssets()
     {
         List<FlagSO> listOfFlagAssets = new List<FlagSO>();
+        foreach (FlagSO flag in listOfFlagAssets)
+        {
+            foreach(FlagData flagData in flag.flagDatas)
+            {
+                flagData.isFlagEnabled = flagData.flagDefaultState; //might need to be constrained to run once (check this)
+            }
+                
+        }
         string[] assetList = AssetDatabase.FindAssets("t:FlagSO"); // find all flag stores in project, returns asset GUIDs
         if (assetList.Length != 0)
         {
