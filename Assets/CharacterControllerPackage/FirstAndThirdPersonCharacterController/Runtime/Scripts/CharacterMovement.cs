@@ -79,8 +79,8 @@ public class CharacterMovement : MonoBehaviour
         
         if (inputActions.CharacterControls.Crouch.triggered) // if crouch is triggered switch settings 
         {
-            isCrouched = animator.GetBool("isCrouched"); //check if currently crouched
             animator.SetBool("isCrouched", !isCrouched);
+            isCrouched = animator.GetBool("isCrouched"); //check if currently crouched
             characterController.height = isCrouched ? crouchedHeight : standingHeight;
             characterController.center = isCrouched ? new Vector3(0, crouchedCenterY, crouchedCenterZOffset) : new Vector3(0, standingCenterY, 0);
             characterController.radius = isCrouched ? crouchedRadius : standingRadius;

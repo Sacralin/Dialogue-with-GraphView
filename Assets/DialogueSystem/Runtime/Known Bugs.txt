@@ -1,8 +1,8 @@
-Current method of saving flag state is permanent and does not reset on run - FlagNodeTools
+Current dialogue node not saved after a conversation 
+created NodeData currentnode in the scriptable object, need to reference this in the dialogue manager.
+it resets to an empty node object when the game is restarted (in dialogue manager)
 
-Current dialogue node not saved after a conversation - test this before you change anything just to be sure 
-
-imported character controller hitbox height not adjusting properly
+dialogue text position doesnt allign with text box consistantly 
 
 node creation position is not relative to current screen space
 

@@ -1,11 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -29,6 +24,9 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        NodeAndFlagAssetStateManager assetStateManager = new NodeAndFlagAssetStateManager();
+        assetStateManager.ResetAllFlagAssets();
+        assetStateManager.ResetAllNodeAssets();
         dialogueInput = new DialogueInput();
         dialogueInput.DialogueControls.Enable();
         dialoguePanelObject.SetActive(false);
@@ -43,6 +41,11 @@ public class DialogueManager : MonoBehaviour
         //    Debug.Log(currentNode.nodeTypeData);
         //}
         RunCurrentNode();
+        if(dialogueSO != null)
+        {
+            dialogueSO.currentNode = currentNode;
+        }
+        
         
         
     }
@@ -55,9 +58,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(DialogueSO dialogue,bool dialogueStarted = false ) //this might reset every time so might have to set a var in dialogueSO to keep the position
     {
-        hasDialogueStarted = dialogueStarted;
-        //dialogueSO = ScriptableObject.CreateInstance<DialogueSO>();
-        if(dialogue != dialogueSO)
+        hasDialogueStarted = dialogueStarted; //check if the player has started a dialogue (determines if we run dialogue nodes or not)
+        if(dialogue != dialogueSO) // check if a new dialogue has been started
         {
             currentNode = null;
         }
@@ -130,8 +132,8 @@ public class DialogueManager : MonoBehaviour
                             {
                                 flagData.isFlagEnabled = false;
                             }
-                            EditorUtility.SetDirty(targetFlagSO); 
-                            AssetDatabase.SaveAssets();
+                            //EditorUtility.SetDirty(targetFlagSO); 
+                            //AssetDatabase.SaveAssets();
                             GetNextNode();
 
                         }
@@ -149,7 +151,6 @@ public class DialogueManager : MonoBehaviour
         {
             if(flagData.flagName == currentNode.triggerFlagData)
             {
-                Debug.Log(flagData.isFlagEnabled);
                 if (flagData.isFlagEnabled)
                 {
                     //get next node port/choices 0
@@ -235,7 +236,6 @@ public class DialogueManager : MonoBehaviour
                     Button choiceButton = Instantiate(choiceButtonPrefab, choicePanel);
                     choiceButton.GetComponentInChildren<TMP_Text>().text = choices.choiceData;
                     choiceButton.onClick.AddListener(delegate { 
-                        Debug.Log("Button Clicked");
                         ClearButtons();
                         GetNextNode(choices.indexData); 
 
@@ -265,7 +265,6 @@ public class DialogueManager : MonoBehaviour
 
     private void GetNextNode(int choice = 0)
     {
-        Debug.Log(choice);
         string nextNode = currentNode.choicesData[choice].edgeDataData.targetNodeGuidData;
         foreach(NodeDataSO node in dialogueSO.nodesData)
         {

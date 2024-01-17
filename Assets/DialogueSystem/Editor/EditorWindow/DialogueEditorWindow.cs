@@ -12,7 +12,7 @@ public class DialogueEditorWindow : EditorWindow
     private DialogueSO currentDialogue;
     private TextField dialogueName;
     private NodeIO nodeIO;
-    private NodeInspector nodeInspector;
+    private NodeInspectorWindow nodeInspector;
 
 
     [MenuItem("ZTools/Dialogue System/Dialogue Graph")]
@@ -74,7 +74,7 @@ public class DialogueEditorWindow : EditorWindow
 
     private void OpenInspectorWindow()
     {
-        nodeInspector = (NodeInspector)GetWindow(typeof(NodeInspector));
+        nodeInspector = (NodeInspectorWindow)GetWindow(typeof(NodeInspectorWindow));
         
     }
 

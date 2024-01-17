@@ -5,6 +5,7 @@ using UnityEngine;
 public class DialogueSO : ScriptableObject
 {
     public List<NodeDataSO> nodesData = new List<NodeDataSO> ();
+    public NodeDataSO currentNode;
     
 }
 

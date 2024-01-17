@@ -17,7 +17,7 @@ public class FlagEditorWindow : EditorWindow
     private TextField flagTextfield;
     private Toggle flagValue;
     private string defaultObjectEntry = "No Objects Found in Project!";
-    
+
     [MenuItem("ZTools/Dialogue System/Flag Editor")]
     public static void Open()
     {
@@ -50,7 +50,7 @@ public class FlagEditorWindow : EditorWindow
     {
         flagSODropdown = new DropdownField("Flag Objects:") { choices = flagSONames };
         rootVisualElement.Add(flagSODropdown);
-        
+
         flagList = new DropdownField("Flag List:") { choices = flagSOListData };
         rootVisualElement.Add(flagList);
 
@@ -60,11 +60,11 @@ public class FlagEditorWindow : EditorWindow
         valueLabel = new Label();
         rootVisualElement.Add(valueLabel);
 
-        deleteEntry = new Button(() => deleteSelectedEntry()) { text = "Delete Entry" }; 
+        deleteEntry = new Button(() => deleteSelectedEntry()) { text = "Delete Entry" };
         rootVisualElement.Add(deleteEntry);
 
         VisualElement spaceElement = new VisualElement();
-        spaceElement.style.height = 20; 
+        spaceElement.style.height = 20;
         rootVisualElement.Add(spaceElement);
 
         flagTextfield = new TextField("Create New Flag:");
@@ -77,7 +77,7 @@ public class FlagEditorWindow : EditorWindow
         rootVisualElement.Add(addNewFlagButton);
     }
 
-    
+
 
     private void GetAllFlagAssets()
     {
@@ -104,12 +104,12 @@ public class FlagEditorWindow : EditorWindow
         if (selectedFlagSO != defaultObjectEntry)
         {
             flagSOListData.Clear();
-            foreach(FlagSO flagSO in flagSOs)
+            foreach (FlagSO flagSO in flagSOs)
             {
-                if(flagSO.name == selectedFlagSO)
+                if (flagSO.name == selectedFlagSO)
                 {
-                    currentFlagSO = flagSO; 
-                    foreach(FlagData flagData in currentFlagSO.flagDatas)
+                    currentFlagSO = flagSO;
+                    foreach (FlagData flagData in currentFlagSO.flagDatas)
                     {
                         flagSOListData.Add(flagData.flagName);
                     }
@@ -117,11 +117,11 @@ public class FlagEditorWindow : EditorWindow
                 }
             }
         }
-        
+
     }
     private void deleteSelectedEntry()
     {
-        foreach(FlagData flagData in currentFlagSO.flagDatas)
+        foreach (FlagData flagData in currentFlagSO.flagDatas)
         {
             if (flagData.flagName == flagList.value)
             {
@@ -134,21 +134,21 @@ public class FlagEditorWindow : EditorWindow
                 break;
             }
         }
-        
+
     }
 
     private void DiaplaySelectedFlagData()
     {
         string selectedFlag = flagList.value;
-        if (selectedFlag != null) 
+        if (selectedFlag != null)
         {
-            foreach(FlagData flagData in currentFlagSO.flagDatas)
+            foreach (FlagData flagData in currentFlagSO.flagDatas)
             {
-                if( flagData.flagName == selectedFlag)
+                if (flagData.flagName == selectedFlag)
                 {
                     nameLabel.text = ($"Flag Name: {flagData.flagName}.");
                     valueLabel.text = ($"Flag Value: {flagData.isFlagEnabled}");
-                    
+
                     deleteEntry.style.display = DisplayStyle.Flex;
                 }
             }
@@ -165,6 +165,7 @@ public class FlagEditorWindow : EditorWindow
         FlagData flagData = new FlagData();
         flagData.flagName = text;
         flagData.isFlagEnabled = value;
+        flagData.flagDefaultState = value;
         if (currentFlagSO != null)
         {
             Debug.Log($"FlagSO {currentFlagSO.name}");
@@ -179,5 +180,5 @@ public class FlagEditorWindow : EditorWindow
 
 
     }
-    
+
 }

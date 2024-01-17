@@ -20,5 +20,5 @@ MonoBehaviour:
     isFlagEnabled: 0
     flagDefaultState: 0
   - flagName: talk
-    isFlagEnabled: 1
+    isFlagEnabled: 0
     flagDefaultState: 0
