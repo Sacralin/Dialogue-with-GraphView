@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    //private InputActionAsset[] playerInputs;
-    //private bool[] isPlayerInputEnabled;
-    //public List<string> mapsToDisable = new List<string>();
     private DialogueInput dialogueInput;
     private DialogueSO dialogueSO;
     private NodeDataSO currentNode;
@@ -36,32 +33,29 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (currentNode != null)
-        //{
-        //    Debug.Log(currentNode.nodeTypeData);
-        //}
+        
         RunCurrentNode();
-        if(dialogueSO != null)
-        {
-            dialogueSO.currentNode = currentNode;
-        }
-        
-        
         
     }
 
     public void HasExited()
     {
-        //dialogueSO = null;
+        
     }
 
 
     public void StartDialogue(DialogueSO dialogue,bool dialogueStarted = false ) //this might reset every time so might have to set a var in dialogueSO to keep the position
     {
         hasDialogueStarted = dialogueStarted; //check if the player has started a dialogue (determines if we run dialogue nodes or not)
-        if(dialogue != dialogueSO) // check if a new dialogue has been started
+        if (dialogue != dialogueSO) // check if a new dialogue has been started
         {
             currentNode = null;
+
+            if (dialogue.currentNode.nodeTypeData != null)
+            {
+                Debug.Log(dialogue.currentNode.nodeTypeData);
+                currentNode = dialogue.currentNode;
+            }
         }
         dialogueSO = dialogue;
         if (currentNode == null) //if this is first interaction 
@@ -132,8 +126,6 @@ public class DialogueManager : MonoBehaviour
                             {
                                 flagData.isFlagEnabled = false;
                             }
-                            //EditorUtility.SetDirty(targetFlagSO); 
-                            //AssetDatabase.SaveAssets();
                             GetNextNode();
 
                         }
@@ -190,16 +182,8 @@ public class DialogueManager : MonoBehaviour
                 }
 
             }
-
-            //DiableAllOtherControls();
-           
-            /*
-            if (dialogueInput.DialogueControls.Interact.triggered)
-            {
-                dialogueText.text = "";
-                dialoguePanelObject.SetActive(false);
-                GetNextNode();
-            }*/
+            
+            
         }
         
     }
@@ -211,7 +195,7 @@ public class DialogueManager : MonoBehaviour
         {
             foreach (NodeDataSO node in dialogueSO.nodesData) 
             {
-                if (currentNode.triggerFlagData == node.triggerFlagData) 
+                if (currentNode.triggerFlagData == node.GUIDData) //end node triggerFlagData contains a GUID to return to
                 {
                     currentNode = node; 
                 }
@@ -271,6 +255,7 @@ public class DialogueManager : MonoBehaviour
             if(node.GUIDData == nextNode)
             {
                 currentNode = node;
+                dialogueSO.currentNode = node;
                 RunCurrentNode();
             }
         }

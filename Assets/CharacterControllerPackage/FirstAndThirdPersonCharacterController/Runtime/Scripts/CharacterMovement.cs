@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    private FirstAndThirdPersonCharacterInputs inputActions;
+    public FirstAndThirdPersonCharacterInputs inputActions;
     private CharacterController characterController;
     private Animator animator;
     
