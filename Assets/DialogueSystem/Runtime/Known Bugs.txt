@@ -1,12 +1,9 @@
-Current dialogue node not saved after a conversation 
-created NodeData currentnode in the scriptable object, need to reference this in the dialogue manager.
-it resets to an empty node object when the game is restarted (in dialogue manager)
-ADDING ONTO -- fixed the above issue however the input system retriggers the dialogue after it has ended,
-				working on a revised global input system to manage all aspects of the toolkit.
-
-
 dialogue text position doesnt allign with text box consistantly 
 
-node creation position is not relative to current screen space
+node creation position is not relative to current screen space (graphview)
 
-text on any type of dialogue node could do with wrapping 
+Nodes dont always load in the correct position (graphview)
+
+text on any type of dialogue node could do with wrapping
+
+jump height offset 

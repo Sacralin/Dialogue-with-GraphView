@@ -7,15 +7,14 @@ using UnityEngine.Playables;
 public class InputSystemManager : MonoBehaviour
 {
     ////Character Controller Input Scripts
-    //MouseLook[] mouseLookScripts;
-    //CharacterMovement[] characterMovementSctipts;
+    MouseLook[] mouseLookScripts;
+    CharacterMovement[] characterMovementSctipts;
 
     ////Dialogue System Input Scripts
     //DialogueTrigger[] dialogueTriggerScripts;
-    //DialogueManager[] dialogueManagerScripts;
+    DialogueManager[] dialogueManagerScripts;
+    TwoDimentionalAnimationStateController[] animationStateController; // not all of these need to be arrays as there is only 1 controller.
 
-
-    FirstAndThirdPersonCharacterInputs inputActions;
 
     public enum GameState
     {
@@ -31,9 +30,10 @@ public class InputSystemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        inputActions = new FirstAndThirdPersonCharacterInputs();
-        inputActions.Enable();
+        dialogueManagerScripts = FindObjectsOfType<DialogueManager>();
+        mouseLookScripts = FindObjectsOfType<MouseLook>();
+        characterMovementSctipts = FindObjectsOfType<CharacterMovement>();
+        animationStateController = FindObjectsOfType<TwoDimentionalAnimationStateController>();
 
     }
 
@@ -43,32 +43,82 @@ public class InputSystemManager : MonoBehaviour
         switch (currentState)
         {
             case GameState.Dialogue:
-                HandleDialogueInput();
+                EnableDialogueInput();
+                DisableCharacterInput();
+                //DisablePuzzleInput();
                 break;
             case GameState.Character:
-                HandleCharacterInput();
+                EnableCharacterInput();
+                DisableDialogueInput();
+                //DisablePuzzleInput();
                 break;
             case GameState.Puzzle:
-                HandlePuzzleInput();
+                //EnablePuzzleInput();
+                DisableDialogueInput();
+                DisableCharacterInput();
                 break;
         }
     }
 
-    private void HandlePuzzleInput()
+    private void EnablePuzzleInput()
     {
         throw new NotImplementedException();
     }
 
-    private void HandleCharacterInput()
+    private void DisablePuzzleInput()
     {
         throw new NotImplementedException();
     }
 
-    private void HandleDialogueInput()
+    private void EnableCharacterInput()
     {
-        if (inputActions.CharacterControls.SpaceBar.triggered)
+        foreach (MouseLook mouseLook in mouseLookScripts)
         {
+            mouseLook.inputActions.Enable();
 
         }
+        foreach (CharacterMovement characterMovement in characterMovementSctipts)
+        {
+            characterMovement.inputActions.Enable();
+        }
+        foreach (TwoDimentionalAnimationStateController stateController in animationStateController)
+        {
+            stateController.inputActions.Enable();
+        }
+    }
+
+    private void DisableCharacterInput()
+    {
+        foreach(MouseLook mouseLook in mouseLookScripts)
+        {
+            mouseLook.inputActions.Disable();
+            
+        }
+        foreach(CharacterMovement characterMovement in characterMovementSctipts)
+        {
+            characterMovement.inputActions.Disable();
+        }
+        foreach (TwoDimentionalAnimationStateController stateController in animationStateController)
+        {
+            stateController.inputActions.Disable();
+        }
+    }
+
+    private void EnableDialogueInput()
+    {
+        foreach (DialogueManager dialogueManager in dialogueManagerScripts)
+        {
+            dialogueManager.dialogueInput.Enable();
+        }
+
+    }
+
+    private void DisableDialogueInput()
+    {
+        foreach(DialogueManager dialogueManager in dialogueManagerScripts)
+        {
+            dialogueManager.dialogueInput.Disable();
+        }
+
     }
 }

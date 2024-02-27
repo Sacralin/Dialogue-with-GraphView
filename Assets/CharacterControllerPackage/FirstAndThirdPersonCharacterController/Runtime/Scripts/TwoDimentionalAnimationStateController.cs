@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class TwoDimentionalAnimationStateController : MonoBehaviour
 {
-    Animator animator;
-    FirstAndThirdPersonCharacterInputs inputActions;
+    private Animator animator;
+    public FirstAndThirdPersonCharacterInputs inputActions;
     float velocityZ = 0f;
     float velocityX = 0f;
     public float acceleration = 2.0f;
@@ -16,8 +16,8 @@ public class TwoDimentionalAnimationStateController : MonoBehaviour
     public float maximumRunVelocity = 2.0f;
 
     //increase performance
-    int velocityZHash;
-    int velocityXHash;
+    private int velocityZHash;
+    private int velocityXHash;
 
     // Start is called before the first frame update
     void Start()

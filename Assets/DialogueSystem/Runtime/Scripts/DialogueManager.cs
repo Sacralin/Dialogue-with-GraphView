@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    private DialogueInput dialogueInput;
+    public DialogueInput dialogueInput;
     private DialogueSO dialogueSO;
     private NodeDataSO currentNode;
     public TMP_Text dialogueText;
@@ -16,11 +17,13 @@ public class DialogueManager : MonoBehaviour
     private bool hasDialogueStarted;
     private bool areButtonsAdded;
     private bool keyReleased;
+    private InputSystemManager inputSystemManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        inputSystemManager = FindAnyObjectByType<InputSystemManager>();
         NodeAndFlagAssetStateManager assetStateManager = new NodeAndFlagAssetStateManager();
         assetStateManager.ResetAllFlagAssets();
         assetStateManager.ResetAllNodeAssets();
@@ -33,13 +36,16 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (hasDialogueStarted)
+        {
+            inputSystemManager.currentState = InputSystemManager.GameState.Dialogue;
+        }
+        else if (hasDialogueStarted == false && dialogueInput.DialogueControls.NextDialogue.ReadValue<float>() == 0f)
+        {
+            inputSystemManager.currentState = InputSystemManager.GameState.Character;
+        }
         RunCurrentNode();
-        
-    }
 
-    public void HasExited()
-    {
         
     }
 
@@ -53,7 +59,6 @@ public class DialogueManager : MonoBehaviour
 
             if (dialogue.currentNode.nodeTypeData != null)
             {
-                Debug.Log(dialogue.currentNode.nodeTypeData);
                 currentNode = dialogue.currentNode;
             }
         }
@@ -165,7 +170,7 @@ public class DialogueManager : MonoBehaviour
             dialoguePanelObject.SetActive(true);
             dialogueText.text = currentNode.textData;
 
-            float interact = dialogueInput.DialogueControls.Interact.ReadValue<float>();
+            float interact = dialogueInput.DialogueControls.NextDialogue.ReadValue<float>();
             if (interact > 0 && keyReleased)
             {
 
@@ -190,6 +195,7 @@ public class DialogueManager : MonoBehaviour
 
     private void RunEndNode()
     {
+        
         hasDialogueStarted = false;
         if (currentNode.eventTypeData == "Return To Node")
         {
@@ -261,27 +267,5 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    //private void DiableAllOtherControls()
-    //{
-    //    playerInputs = FindObjectsOfType<InputActionAsset>();
-    //    for (int i = 0; i < playerInputs.Length; i++)
-    //    {
-    //        if (playerInputs[i].name != "DialogueInput")
-    //        {
-    //            playerInputs[i].Disable();
-    //        }
-    //    }
-    //}
-
-    //private void EnableAllOtherControls()
-    //{
-    //    for (int i = 0;i < playerInputs.Length; i++)
-    //    {
-    //        if (playerInputs[i].name != "DialogueInput")
-    //        {
-    //            playerInputs[i].Enable();
-    //            Debug.Log($"Enabled {playerInputs[i].name}");
-    //        }
-    //    }
-    //}
+    
 }

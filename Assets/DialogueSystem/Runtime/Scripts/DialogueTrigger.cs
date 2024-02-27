@@ -55,12 +55,5 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            dialogueManager.HasExited();
-
-        }
-    }
+    
 }

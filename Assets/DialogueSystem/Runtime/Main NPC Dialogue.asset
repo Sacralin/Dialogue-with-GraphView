@@ -68,22 +68,6 @@ MonoBehaviour:
     triggerValueData: 
     eventTypeData: 
   - nodeTypeData: BasicDialogue
-    customNodeNameData: CustomNodeName
-    GUIDData: 08b16024-880b-4ac4-aaec-a7bcb45655cb
-    graphPositionData: {x: 249, y: 50}
-    choicesData:
-    - indexData: 0
-      choiceData: 
-      portNameData: 
-      edgeDataData:
-        sourceNodeGuidData: 08b16024-880b-4ac4-aaec-a7bcb45655cb
-        targetNodeGuidData: 1bcbaa6d-e931-4c8a-938e-1c23da198101
-    textData: hi
-    flagObjectData: 
-    triggerFlagData: 
-    triggerValueData: 
-    eventTypeData: 
-  - nodeTypeData: BasicDialogue
     customNodeNameData: walk true
     GUIDData: a21ffeb7-038e-443f-b2e6-75007113e1ec
     graphPositionData: {x: 1208, y: -104}
@@ -205,5 +189,38 @@ MonoBehaviour:
     textData: Dialogue Text
     flagObjectData: FlagList
     triggerFlagData: walk
+    triggerValueData: 
+    eventTypeData: 
+  - nodeTypeData: BasicDialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: 08b16024-880b-4ac4-aaec-a7bcb45655cb
+    graphPositionData: {x: 249, y: 50}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 
+      edgeDataData:
+        sourceNodeGuidData: 08b16024-880b-4ac4-aaec-a7bcb45655cb
+        targetNodeGuidData: 1bcbaa6d-e931-4c8a-938e-1c23da198101
+    textData: hi
+    flagObjectData: 
+    triggerFlagData: 
+    triggerValueData: 
+    eventTypeData: 
+  currentNode:
+    nodeTypeData: BasicDialogue
+    customNodeNameData: CustomNodeName
+    GUIDData: 08b16024-880b-4ac4-aaec-a7bcb45655cb
+    graphPositionData: {x: 249, y: 50}
+    choicesData:
+    - indexData: 0
+      choiceData: 
+      portNameData: 
+      edgeDataData:
+        sourceNodeGuidData: 08b16024-880b-4ac4-aaec-a7bcb45655cb
+        targetNodeGuidData: 1bcbaa6d-e931-4c8a-938e-1c23da198101
+    textData: 'hi Dan Dan Dan Dan Dan Dan Dan Dan Dan Dan Dan Dan Dan Dan Dan '
+    flagObjectData: 
+    triggerFlagData: 
     triggerValueData: 
     eventTypeData: 
