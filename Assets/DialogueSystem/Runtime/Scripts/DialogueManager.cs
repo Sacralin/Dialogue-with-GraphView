@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialoguePanelObject;
     public GameObject choicePanelObject;
     private bool hasDialogueStarted;
+    private bool inputChanged;
     private bool areButtonsAdded;
     private bool keyReleased;
     private InputSystemManager inputSystemManager;
@@ -36,23 +37,32 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hasDialogueStarted)
+        if (inputChanged)
         {
-            inputSystemManager.currentState = InputSystemManager.GameState.Dialogue;
+            if (hasDialogueStarted)
+            {
+                inputSystemManager.currentState = InputSystemManager.GameState.Dialogue;
+                inputChanged = false;
+            }
+            else if (hasDialogueStarted == false && dialogueInput.DialogueControls.NextDialogue.ReadValue<float>() == 0f)
+            {
+                inputSystemManager.currentState = InputSystemManager.GameState.Character;
+                inputChanged = false;
+            }
         }
-        else if (hasDialogueStarted == false && dialogueInput.DialogueControls.NextDialogue.ReadValue<float>() == 0f)
-        {
-            inputSystemManager.currentState = InputSystemManager.GameState.Character;
-        }
+        
         RunCurrentNode();
 
         
     }
 
+    
+
 
     public void StartDialogue(DialogueSO dialogue,bool dialogueStarted = false ) //this might reset every time so might have to set a var in dialogueSO to keep the position
     {
         hasDialogueStarted = dialogueStarted; //check if the player has started a dialogue (determines if we run dialogue nodes or not)
+        if (hasDialogueStarted) { inputChanged = true; }
         if (dialogue != dialogueSO) // check if a new dialogue has been started
         {
             currentNode = null;
@@ -197,6 +207,7 @@ public class DialogueManager : MonoBehaviour
     {
         
         hasDialogueStarted = false;
+        inputChanged = true;
         if (currentNode.eventTypeData == "Return To Node")
         {
             foreach (NodeDataSO node in dialogueSO.nodesData) 

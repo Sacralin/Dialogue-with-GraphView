@@ -6,15 +6,16 @@ using UnityEngine.Playables;
 
 public class InputSystemManager : MonoBehaviour
 {
-    ////Character Controller Input Scripts
+    //Character Controller Input Scripts
     MouseLook[] mouseLookScripts;
     CharacterMovement[] characterMovementSctipts;
 
-    ////Dialogue System Input Scripts
-    //DialogueTrigger[] dialogueTriggerScripts;
+    //Dialogue System Input Scripts
     DialogueManager[] dialogueManagerScripts;
     TwoDimentionalAnimationStateController[] animationStateController; // not all of these need to be arrays as there is only 1 controller.
 
+    //Puzzle Input Scripts
+    CircleMazeController[] mazeControllerScripts;
 
     public enum GameState
     {
@@ -24,17 +25,18 @@ public class InputSystemManager : MonoBehaviour
     }
 
     
-    public GameState currentState = GameState.Character;
+    public GameState currentState;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        mazeControllerScripts = FindObjectsOfType<CircleMazeController>();
         dialogueManagerScripts = FindObjectsOfType<DialogueManager>();
         mouseLookScripts = FindObjectsOfType<MouseLook>();
         characterMovementSctipts = FindObjectsOfType<CharacterMovement>();
         animationStateController = FindObjectsOfType<TwoDimentionalAnimationStateController>();
-
+        currentState = GameState.Character;
     }
 
     // Update is called once per frame
@@ -45,15 +47,15 @@ public class InputSystemManager : MonoBehaviour
             case GameState.Dialogue:
                 EnableDialogueInput();
                 DisableCharacterInput();
-                //DisablePuzzleInput();
+                DisablePuzzleInput();
                 break;
             case GameState.Character:
                 EnableCharacterInput();
                 DisableDialogueInput();
-                //DisablePuzzleInput();
+                DisablePuzzleInput();
                 break;
             case GameState.Puzzle:
-                //EnablePuzzleInput();
+                EnablePuzzleInput();
                 DisableDialogueInput();
                 DisableCharacterInput();
                 break;
@@ -62,12 +64,18 @@ public class InputSystemManager : MonoBehaviour
 
     private void EnablePuzzleInput()
     {
-        throw new NotImplementedException();
+        foreach(CircleMazeController mazeController in mazeControllerScripts)
+        {
+            mazeController.inputActions.Enable();
+        }
     }
 
     private void DisablePuzzleInput()
     {
-        throw new NotImplementedException();
+        foreach (CircleMazeController mazeController in mazeControllerScripts)
+        {
+            mazeController.inputActions.Disable();
+        }
     }
 
     private void EnableCharacterInput()

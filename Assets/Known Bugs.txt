@@ -7,3 +7,7 @@ Nodes dont always load in the correct position (graphview)
 text on any type of dialogue node could do with wrapping
 
 jump height offset 
+
+Having multiple puzzle doors in the scene doesnt behave well
+
+Running at the puzzle door will sometimes cause the player to fall through the world (Collision issue)
