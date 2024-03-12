@@ -6,18 +6,18 @@ using UnityEngine;
 
 public class TwoDimentionalAnimationStateController : MonoBehaviour
 {
-    private Animator animator;
+    Animator animator;
     public FirstAndThirdPersonCharacterInputs inputActions;
-    float velocityZ = 0f;
+    public float velocityZ = 0f;
     float velocityX = 0f;
     public float acceleration = 2.0f;
     public float deceleration = 2.0f;
     public float maximumWalkVelocity = 0.5f;
     public float maximumRunVelocity = 2.0f;
-
+    
     //increase performance
-    private int velocityZHash;
-    private int velocityXHash;
+    int velocityZHash;
+    int velocityXHash;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class TwoDimentionalAnimationStateController : MonoBehaviour
         velocityXHash = Animator.StringToHash("Velocity X");
     }
 
-    void ChangeVelocity(bool forwardPressed, bool leftPressed, bool rightPressed, bool backwardPressed, bool runPressed, float currentMaxVelocity)
+    public void ChangeVelocity(bool forwardPressed, bool leftPressed, bool rightPressed, bool backwardPressed, bool runPressed, float currentMaxVelocity)
     {
         //if player pressed forward, increase velocity in Z direction
         if (forwardPressed && velocityZ < currentMaxVelocity)

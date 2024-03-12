@@ -55,7 +55,7 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""SpaceBar"",
+                    ""name"": ""Jump"",
                     ""type"": ""Value"",
                     ""id"": ""71ba5b41-f23e-4e23-86d8-322dbd0624ad"",
                     ""expectedControlType"": ""Button"",
@@ -89,6 +89,15 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftMouseClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""1ba8878b-41b6-4d8b-bef3-c6e7650a8c0e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,7 +196,18 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpaceBar"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a05a915a-7ed5-44f3-b6e7-eaddde0843c0"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -223,6 +243,17 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
                     ""action"": ""ChangeCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4375aedf-9c19-4625-8f8b-ddaf599f8fb4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftMouseClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -234,10 +265,11 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
         m_CharacterControls_Walk = m_CharacterControls.FindAction("Walk", throwIfNotFound: true);
         m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
         m_CharacterControls_MouseMovement = m_CharacterControls.FindAction("MouseMovement", throwIfNotFound: true);
-        m_CharacterControls_SpaceBar = m_CharacterControls.FindAction("SpaceBar", throwIfNotFound: true);
+        m_CharacterControls_Jump = m_CharacterControls.FindAction("Jump", throwIfNotFound: true);
         m_CharacterControls_MouseWheelButton = m_CharacterControls.FindAction("MouseWheelButton", throwIfNotFound: true);
         m_CharacterControls_Crouch = m_CharacterControls.FindAction("Crouch", throwIfNotFound: true);
         m_CharacterControls_ChangeCamera = m_CharacterControls.FindAction("ChangeCamera", throwIfNotFound: true);
+        m_CharacterControls_LeftMouseClick = m_CharacterControls.FindAction("LeftMouseClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -302,10 +334,11 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
     private readonly InputAction m_CharacterControls_Walk;
     private readonly InputAction m_CharacterControls_Run;
     private readonly InputAction m_CharacterControls_MouseMovement;
-    private readonly InputAction m_CharacterControls_SpaceBar;
+    private readonly InputAction m_CharacterControls_Jump;
     private readonly InputAction m_CharacterControls_MouseWheelButton;
     private readonly InputAction m_CharacterControls_Crouch;
     private readonly InputAction m_CharacterControls_ChangeCamera;
+    private readonly InputAction m_CharacterControls_LeftMouseClick;
     public struct CharacterControlsActions
     {
         private @FirstAndThirdPersonCharacterInputs m_Wrapper;
@@ -313,10 +346,11 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
         public InputAction @Walk => m_Wrapper.m_CharacterControls_Walk;
         public InputAction @Run => m_Wrapper.m_CharacterControls_Run;
         public InputAction @MouseMovement => m_Wrapper.m_CharacterControls_MouseMovement;
-        public InputAction @SpaceBar => m_Wrapper.m_CharacterControls_SpaceBar;
+        public InputAction @Jump => m_Wrapper.m_CharacterControls_Jump;
         public InputAction @MouseWheelButton => m_Wrapper.m_CharacterControls_MouseWheelButton;
         public InputAction @Crouch => m_Wrapper.m_CharacterControls_Crouch;
         public InputAction @ChangeCamera => m_Wrapper.m_CharacterControls_ChangeCamera;
+        public InputAction @LeftMouseClick => m_Wrapper.m_CharacterControls_LeftMouseClick;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -335,9 +369,9 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
             @MouseMovement.started += instance.OnMouseMovement;
             @MouseMovement.performed += instance.OnMouseMovement;
             @MouseMovement.canceled += instance.OnMouseMovement;
-            @SpaceBar.started += instance.OnSpaceBar;
-            @SpaceBar.performed += instance.OnSpaceBar;
-            @SpaceBar.canceled += instance.OnSpaceBar;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
             @MouseWheelButton.started += instance.OnMouseWheelButton;
             @MouseWheelButton.performed += instance.OnMouseWheelButton;
             @MouseWheelButton.canceled += instance.OnMouseWheelButton;
@@ -347,6 +381,9 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
             @ChangeCamera.started += instance.OnChangeCamera;
             @ChangeCamera.performed += instance.OnChangeCamera;
             @ChangeCamera.canceled += instance.OnChangeCamera;
+            @LeftMouseClick.started += instance.OnLeftMouseClick;
+            @LeftMouseClick.performed += instance.OnLeftMouseClick;
+            @LeftMouseClick.canceled += instance.OnLeftMouseClick;
         }
 
         private void UnregisterCallbacks(ICharacterControlsActions instance)
@@ -360,9 +397,9 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
             @MouseMovement.started -= instance.OnMouseMovement;
             @MouseMovement.performed -= instance.OnMouseMovement;
             @MouseMovement.canceled -= instance.OnMouseMovement;
-            @SpaceBar.started -= instance.OnSpaceBar;
-            @SpaceBar.performed -= instance.OnSpaceBar;
-            @SpaceBar.canceled -= instance.OnSpaceBar;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
             @MouseWheelButton.started -= instance.OnMouseWheelButton;
             @MouseWheelButton.performed -= instance.OnMouseWheelButton;
             @MouseWheelButton.canceled -= instance.OnMouseWheelButton;
@@ -372,6 +409,9 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
             @ChangeCamera.started -= instance.OnChangeCamera;
             @ChangeCamera.performed -= instance.OnChangeCamera;
             @ChangeCamera.canceled -= instance.OnChangeCamera;
+            @LeftMouseClick.started -= instance.OnLeftMouseClick;
+            @LeftMouseClick.performed -= instance.OnLeftMouseClick;
+            @LeftMouseClick.canceled -= instance.OnLeftMouseClick;
         }
 
         public void RemoveCallbacks(ICharacterControlsActions instance)
@@ -394,9 +434,10 @@ public partial class @FirstAndThirdPersonCharacterInputs: IInputActionCollection
         void OnWalk(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnMouseMovement(InputAction.CallbackContext context);
-        void OnSpaceBar(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnMouseWheelButton(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnChangeCamera(InputAction.CallbackContext context);
+        void OnLeftMouseClick(InputAction.CallbackContext context);
     }
 }

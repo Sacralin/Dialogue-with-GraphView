@@ -22,7 +22,7 @@ public class MouseLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; //lock the cursor to the center of the screen
+        //Cursor.lockState = CursorLockMode.Locked; //lock the cursor to the center of the screen
     }
 
     // Update is called once per frame

@@ -1,11 +1,25 @@
+using Cinemachine;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class CharacterMovement : MonoBehaviour
 {
     public FirstAndThirdPersonCharacterInputs inputActions;
     private CharacterController characterController;
     private Animator animator;
-    
+    private TwoDimentionalAnimationStateController animationStateController;
+
+    public Camera clickAndPointCamera; // this will need to be the active cinemachine camera
+    private NavMeshAgent agent;
+
+    public bool firstPersonEnabled;
+    public bool thirdPersonEnabled;
+    public bool pointAndClickEnabled;
+    public bool pointAndClickCameraOnly;
+    public bool crouchEnabled;
+    public bool jumpEnabled;
+
     //movement settings
     private Vector3 moveDirection;
     private Vector2 currentInput;
@@ -17,38 +31,87 @@ public class CharacterMovement : MonoBehaviour
     
     //collision mesh settings 
     private bool isCrouched;
-    public float standingHeight = 1.8f;
-    public float crouchedHeight = 1.3f;
+    [SerializeField]
+    private bool isGrounded;
+    private float standingHeight = 1.8f;
+    private float crouchedHeight = 1.3f;
     private float standingCenterY = 0.98f;
     private float crouchedCenterY = 0.7f;
     private float crouchedCenterZOffset = 0.2f;
-    public float standingRadius = 0.25f;
-    public float crouchedRadius = 0.47f;
+    private float standingRadius = 0.25f;
+    private float crouchedRadius = 0.47f;
     
     // Start is called before the first frame update
     void Start()
     {
+        animationStateController = GetComponent<TwoDimentionalAnimationStateController>();
+        clickAndPointCamera = Camera.main;
+        agent = GetComponent<NavMeshAgent>();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         inputActions = new FirstAndThirdPersonCharacterInputs();
         inputActions.CharacterControls.Enable();
+        if (pointAndClickCameraOnly) 
+        {
+            animationStateController.enabled = false;
+        }
+        else
+        {
+
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleMovementInput();
-        HandleJump();
-        Crouch();
+        
+
+        isGrounded = characterController.isGrounded;
+        if (inputActions.CharacterControls.Walk.triggered)
+        {
+            if (characterController.enabled == false)
+            {
+                agent.enabled = false;
+                characterController.enabled = true;
+                //animator.SetFloat("Velocity Z", 0f);
+                //animationStateController.ChangeVelocity(false, false, false, false, false, 2.0f);
+            }
+            
+        }
+
+        if (characterController.enabled)
+        {
+            if (pointAndClickCameraOnly)
+            {
+                HandleCameraRelativeMovementInput();
+                
+            }
+            else
+            {
+                HandleMovementInput();
+            }
+            
+        }
+
+
+        if (jumpEnabled) { HandleJump(); }
+        if (crouchEnabled) { Crouch(); }
+        if (pointAndClickEnabled) { HandleClickAndPoint(); }
     }
 
     private void HandleJump()
     {
-        if (inputActions.CharacterControls.SpaceBar.triggered && characterController.isGrounded)
+        // inputActions.CharacterControls.SpaceBar.triggered
+        if (inputActions.CharacterControls.Jump.triggered)
         {
-            moveDirection.y = jumpForce;
-            animator.SetBool("isJumping", true);
+            if (isGrounded)
+            {
+                moveDirection.y = jumpForce;
+                animator.SetBool("isJumping", true);
+            }
         }
+        
     }
 
     //this method is called from the jump animation once the animation is complete.
@@ -74,6 +137,57 @@ public class CharacterMovement : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime); //apply movement to player character
     }
 
+    private void HandleCameraRelativeMovementInput()
+    {
+        bool runPressed = inputActions.CharacterControls.Run.ReadValue<float>() > 0; // is run pressed
+        if (isCrouched) { currentSpeed = walkSpeed; } // if crouched limit current speed to walkspeed
+        else { currentSpeed = runPressed ? runSpeed : walkSpeed; } // else if run pressed apply run speed, if not then apply walk speed
+
+        currentInput = inputActions.CharacterControls.Walk.ReadValue<Vector2>(); // read input values from composite vector 2 inputs
+
+        // Get the camera's forward and right vectors
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        // Flatten the vectors to ignore vertical component
+        cameraForward.y = 0f;
+        cameraRight.y = 0f;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        // Calculate movement direction relative to camera
+        Vector3 moveDirection = (cameraForward * currentInput.y * walkSpeed) +
+                                (cameraRight * currentInput.x * walkSpeed);
+
+        // Apply gravity if not grounded
+        if (!characterController.isGrounded)
+        {
+            moveDirection.y += gravity * Time.deltaTime;
+        }
+
+        // Move the character
+        characterController.Move(moveDirection * Time.deltaTime); // apply movement to player character
+
+        // Rotate the character to face the movement direction
+        if (moveDirection.magnitude > 0.1f) // Only rotate if there's actual movement
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * Time.deltaTime);
+        }
+        
+        if (currentInput != new Vector2(0, 0))
+        {
+            animator.SetFloat("Velocity Z", 0.5f);
+        }
+        else
+        {
+            animator.SetFloat("Velocity Z", 0f);
+        }
+
+
+    }
+
+
     private void Crouch()
     {
         
@@ -87,4 +201,39 @@ public class CharacterMovement : MonoBehaviour
         }
     }
     
+    private void HandleClickAndPoint()
+    {
+        if (agent.enabled)
+        {
+            if (agent.remainingDistance < 0.3f)
+            {
+                characterController.enabled = true;
+                agent.enabled = false;
+                animator.SetFloat("Velocity Z", 0f);
+                //animationStateController.ChangeVelocity(false, false, false, false, false, 2.0f);
+            }
+            else
+            {
+                animator.SetFloat("Velocity Z", 0.5f);
+                //animationStateController.ChangeVelocity(true, false, false, false, false, 2.0f);
+                //animationStateController.velocityZ = 1;
+            }
+        }
+
+        //!Input.GetMouseButton(0)
+        if (inputActions.CharacterControls.LeftMouseClick.ReadValue<float>() == 0) return;
+
+        RaycastHit hit;
+        var ray = clickAndPointCamera.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray, out hit))
+        {
+            agent.enabled = true;
+            characterController.enabled = false;
+            agent.destination = hit.point;
+            
+        }
+
+        
+        
+    }
 }

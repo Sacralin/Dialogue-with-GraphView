@@ -7,9 +7,13 @@ public class CameraSwitcher : MonoBehaviour
     public CinemachineVirtualCamera thirdPersonCamera; 
     public CinemachineVirtualCamera firstPersonCamera;
     public CinemachineVirtualCamera firstPersonCrouchedCamera;
+    public CinemachineVirtualCamera pointAndClickCamera;
     public Camera mainCamera;
+    public GameObject firstPersonMouseLookGameObject;
+    public GameObject thirdPersonMouseLookGameObject;
     Animator animator;
     FirstAndThirdPersonCharacterInputs inputActions; 
+    private CharacterMovement characterMovement;
 
     // bools for camera switching logic
     bool isFirstPerson;
@@ -18,20 +22,46 @@ public class CameraSwitcher : MonoBehaviour
     
     void Start()
     {
+        
+        characterMovement = GetComponent<CharacterMovement>();
         inputActions = new FirstAndThirdPersonCharacterInputs();
         inputActions.CharacterControls.Enable();
         animator = GetComponent<Animator>();
-        thirdPersonCamera.gameObject.SetActive(true); //default active camera is third person
-        isFirstPerson = false; // this is to check if were in first or third person
-        firstPersonCamera.gameObject.SetActive(false); //disable first person cameras
-        firstPersonCrouchedCamera.gameObject.SetActive(false);
+        
+        if (characterMovement.pointAndClickCameraOnly)
+        {
+            MouseLook mouseLookFirstPerson = firstPersonMouseLookGameObject.GetComponent<MouseLook>();
+            mouseLookFirstPerson.enabled = false;
+            MouseLook mouseLookThirdPerson = thirdPersonMouseLookGameObject.GetComponent<MouseLook>();
+            mouseLookThirdPerson.enabled = false;
+            thirdPersonCamera.gameObject.SetActive(false); 
+            firstPersonCamera.gameObject.SetActive(false); 
+            firstPersonCrouchedCamera.gameObject.SetActive(false);
+            pointAndClickCamera.gameObject.SetActive(true);
+        }
+        else
+        {
+            thirdPersonCamera.gameObject.SetActive(true); //default active camera is third person
+            isFirstPerson = false; // this is to check if were in first or third person
+            firstPersonCamera.gameObject.SetActive(false); //disable first person cameras
+            firstPersonCrouchedCamera.gameObject.SetActive(false);
+            pointAndClickCamera.gameObject.SetActive(false);
+        }
         
     }
 
     void Update()
     {
-        SwitchPersonPerspective();
-        SwitchCrouchedPerspective();
+        if (characterMovement.pointAndClickCameraOnly)
+        {
+            ClickAndPointPerspective();
+        }
+        else
+        {
+            SwitchPersonPerspective();
+            SwitchCrouchedPerspective();
+        }
+        
     }
 
     private void SwitchPersonPerspective()
@@ -78,5 +108,10 @@ public class CameraSwitcher : MonoBehaviour
                 firstPersonCamera.gameObject.SetActive(isCrouched);          //variable hasnt changed, not an ideal solution but it works for now
             }
         }
+    }
+
+    private void ClickAndPointPerspective()
+    {
+        pointAndClickCamera.gameObject.SetActive(true);
     }
 }
