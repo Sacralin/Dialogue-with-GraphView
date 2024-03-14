@@ -18,7 +18,7 @@ public class FlagEditorWindow : EditorWindow
     private Toggle flagValue;
     private string defaultObjectEntry = "No Objects Found in Project!";
 
-    [MenuItem("ZTools/Dialogue System/Flag Editor")]
+    [MenuItem("/Window/Toolkit/Dialogue System/Flag Editor")]
     public static void Open()
     {
         GetWindow<FlagEditorWindow>();

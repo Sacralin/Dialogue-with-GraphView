@@ -10,13 +10,11 @@ public class CharacterMovement : MonoBehaviour
     private Animator animator;
     private TwoDimentionalAnimationStateController animationStateController;
 
-    public Camera clickAndPointCamera; // this will need to be the active cinemachine camera
+    private Camera clickAndPointCamera; // this will need to be the active cinemachine camera
     private NavMeshAgent agent;
 
-    public bool firstPersonEnabled;
-    public bool thirdPersonEnabled;
-    public bool pointAndClickEnabled;
     public bool pointAndClickCameraOnly;
+    public bool pointAndClickEnabled;
     public bool crouchEnabled;
     public bool jumpEnabled;
 

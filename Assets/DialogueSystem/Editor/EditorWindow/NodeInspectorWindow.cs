@@ -15,7 +15,7 @@ public class NodeInspectorWindow : EditorWindow
     private Label targetLabel;
     private BaseNode currentNode;
 
-    [MenuItem("ZTools/Dialogue System/Node Inspector Window")]
+    [MenuItem("/Window/Toolkit/Dialogue System/Node Inspector Window")]
     public static void Open()
     {
         GetWindow<NodeInspectorWindow>();

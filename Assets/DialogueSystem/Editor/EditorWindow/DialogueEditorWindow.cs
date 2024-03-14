@@ -15,7 +15,7 @@ public class DialogueEditorWindow : EditorWindow
     private NodeInspectorWindow nodeInspector;
 
 
-    [MenuItem("ZTools/Dialogue System/Dialogue Graph")]
+    [MenuItem("/Window/Toolkit/Dialogue System/Dialogue Graph")]
     public static void Open()
     {
         GetWindow<DialogueEditorWindow>("Dialogue Editor");
