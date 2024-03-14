@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4093485029211662370}
   m_Layer: 0
-  m_Name: FirstAndThirdPersonCharacter
+  m_Name: CharacterController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1229,8 +1229,8 @@ MonoBehaviour:
   clickAndPointCamera: {fileID: 0}
   firstPersonEnabled: 0
   thirdPersonEnabled: 0
-  clickAndPointEnabled: 1
-  clickAndPointCameraOnly: 1
+  pointAndClickEnabled: 0
+  pointAndClickCameraOnly: 0
   crouchEnabled: 0
   jumpEnabled: 0
   walkSpeed: 2
@@ -1295,6 +1295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9526dbb2a1b986641bf74db8896e9a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocityZ: 0
   acceleration: 2
   deceleration: 2
   maximumWalkVelocity: 0.5

@@ -26,12 +26,11 @@ public class CharacterMovement : MonoBehaviour
     public float walkSpeed = 2f;
     public float runSpeed = 4f;
     private float currentSpeed;
-    public float gravity = -9.81f;
+    private float gravity = -9.81f;
     public float jumpForce = 4f;
     
     //collision mesh settings 
     private bool isCrouched;
-    [SerializeField]
     private bool isGrounded;
     private float standingHeight = 1.8f;
     private float crouchedHeight = 1.3f;
